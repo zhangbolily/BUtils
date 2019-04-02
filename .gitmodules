@@ -1,0 +1,3 @@
+[submodule "third_party/BCore"]
+	path = third_party/BCore
+	url = git@gitlab.com:zhangbolily/BCore.git

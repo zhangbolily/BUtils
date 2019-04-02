@@ -1,0 +1,56 @@
+language: cpp
+sudo: required
+dist: xenial
+compiler:
+  - g++-7
+os:
+  - linux
+ruby: 2.2.0
+cache: # see https://docs.travis-ci.com/user/caching/
+  - directories:
+      - $HOME/.cache
+
+before_install:
+  - echo $LANG
+  - echo $LC_ALL
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt update && sudo apt install -y autoconf automake libtool curl make unzip cmake; fi
+
+install:
+  # (fake) install dependencies (usually involves wget, configure, make, ...)
+  # install into cache folder (build binaries+headers only, no sources and do NOT build there)
+  - mkdir -p $HOME/.cache
+  - touch $HOME/.cache/mydependency.so
+  -
+script:
+  - if [ $TRAVIS_OS_NAME == linux ]; then ./build.sh; fi
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-7
+      - g++-7
+      - lcov
+after_success:
+  - if [ $TRAVIS_OS_NAME == linux ]; then pwd && bin/HelloWorld; fi
+  - if [ $TRAVIS_OS_NAME == linux ]; then lcov --capture --directory . --output-file coverage.info; fi
+  - if [ $TRAVIS_OS_NAME == linux ]; then lcov --remove coverage.info '/usr/*' --output-file coverage.info; fi
+  - if [ $TRAVIS_OS_NAME == linux ]; then lcov --list coverage.info; fi
+  - if [ $TRAVIS_OS_NAME == linux ]; then bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"; fi
+branches:
+  only:
+    - master
+    - dev
+notifications:
+
+env:
+  global:
+    - CODECOV_TOKEN="ad9e77a2-75df-4293-afff-8da543c7c1a4"
+    - OPENSSL_DIR=$(brew --prefix openssl)
+    - RBXOPT=-Xcodedb.cache.enabled=no
+    - LANG="en_US.UTF-8"
+    - TRAVIS_COMPILER=g++-7
+    - CXX_FOR_BUILD=g++-7
+    - CC_FOR_BUILD=gcc-7
+    - CXX=g++-7
+    - CC=gcc-7
