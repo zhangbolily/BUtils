@@ -63,7 +63,7 @@ if (CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     else ()
         target_link_libraries(coverage_config INTERFACE --coverage)
     endif ()
-endif (CODE_COVERAGE)
+endif ()
 
 option (BUILD_TESTING "Build the testing tree." ON)
 # Only build tests if we are the top-level project
