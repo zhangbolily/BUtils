@@ -33,11 +33,17 @@
 namespace BUtils {
 
 BTimer::BTimer() {
-
 }
 
 BTimer::~BTimer() {
 }
+
+void BTimer::start() {
+}
+
+void BTimer::stop() {
+}
+
 
 
 }  // namespace BThreadPack

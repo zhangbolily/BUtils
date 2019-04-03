@@ -36,15 +36,6 @@
 #include <signal.h>
 #endif
 
-#include <atomic>
-#include <chrono>
-#include <ctime>
-#include <functional>
-#include <cstring>
-#include <sstream>
-#include <thread>
-#include <utility>
-
 #include "BCore/BCore.h"
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
@@ -58,9 +49,7 @@ using std::chrono::microseconds;
 
 class BTimer{
     enum BTimerStatus {
-        CPUTiming,
-        Timing,
-        Alarm,
+        Active,
         Stop
     };
 
@@ -70,10 +59,7 @@ class BTimer{
 
     void start();
     void stop();
-    std::chrono::microseconds time() const;
-    void startCPUTiming();
-    void stopCPUTiming();
-    int64 CPUTime();
+
 };
 }  // namespace BThreadPack
 

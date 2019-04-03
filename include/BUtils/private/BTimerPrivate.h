@@ -30,6 +30,10 @@
 #ifndef INCLUDE_BUTILS_BTIMERPRIVATE_H_
 #define INCLUDE_BUTILS_BTIMERPRIVATE_H_
 
+#include "BCore/BCore.h"
+#include "BCore/BDebug.h"
+#include "BCore/BType.h"
+
 namespace BUtils {
 using namespace BCore;
 
