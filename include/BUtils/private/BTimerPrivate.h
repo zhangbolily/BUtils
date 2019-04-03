@@ -27,8 +27,8 @@
  * @Date        : 2019-4-3
 */
 
-#ifndef INCLUDE_BUTILS_BTIMER_H_
-#define INCLUDE_BUTILS_BTIMER_H_
+#ifndef INCLUDE_BUTILS_BTIMERPRIVATE_H_
+#define INCLUDE_BUTILS_BTIMERPRIVATE_H_
 
 namespace BUtils {
 using namespace BCore;
@@ -40,4 +40,4 @@ class BTimerPrivate {
 
 }  // namespace BThreadPack
 
-#endif  // INCLUDE_BUTILS_BTIMER_H_
+#endif  // INCLUDE_BUTILS_BTIMERPRIVATE_H_

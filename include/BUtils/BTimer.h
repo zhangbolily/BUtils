@@ -70,6 +70,10 @@ class BTimer{
 
     void start();
     void stop();
+    std::chrono::microseconds time() const;
+    void startCPUTiming();
+    void stopCPUTiming();
+    int64 CPUTime();
 };
 }  // namespace BThreadPack
 

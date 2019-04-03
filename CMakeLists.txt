@@ -109,6 +109,7 @@ install (TARGETS butils DESTINATION lib)
 install (
     FILES
     "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTimer.h"
+    "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTiming.h"
     "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BUtils.h"
     DESTINATION include/${PROJECT_NAME}
 )
