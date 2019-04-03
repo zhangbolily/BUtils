@@ -28,12 +28,36 @@
 */
 
 #include <iostream>
+#include <string>
+#include <set>
 
-#include "BCore/BCore.h"
+#include "BUtils/BUtils.h"
 #include "BCore/BDebug.h"
-#include "BCore/BType.h"
 
 int main(int argc, char** argv) {
     using namespace BCore;
+    using namespace BUtils;
 
+    using std::string;
+    using std::set;
+
+    std::cout << "Start BUtils testing" << std::endl;
+    set<string> UUID_set;
+    for( int i=0; i < 10; i++) {
+        string test_UUID = generateUUID4();
+        if (!isUUID4(test_UUID)) {
+            B_PRINT_ERROR("BUtils test generateUUID4 UUID: "
+                                  << test_UUID << " is not a valid UUID.")
+        }
+        auto insertResult = UUID_set.insert(test_UUID);
+        if (!insertResult.second) {
+            B_PRINT_ERROR("BUtils test generateUUID4 insert UUID: "
+                          << test_UUID << " failed.")
+        }
+
+        std::cout << "generateUUID4 UUID:" << test_UUID
+                << " is a valid UUID" << std::endl;
+    }
+
+    std::cout << "Testing BTimer" << std::endl;
 }
