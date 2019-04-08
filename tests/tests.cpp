@@ -30,8 +30,10 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <unistd.h>
 
 #include "BUtils/BUtils.h"
+#include "BUtils/BTiming.h"
 #include "BCore/BDebug.h"
 
 int main(int argc, char** argv) {
@@ -59,5 +61,14 @@ int main(int argc, char** argv) {
                 << " is a valid UUID" << std::endl;
     }
 
-    std::cout << "Testing BTimer" << std::endl;
+    std::cout << "Testing BTiming" << std::endl;
+    BTiming testTiming;
+    testTiming.start();
+    sleep(1);
+    testTiming.stop();
+    std::cout << "Timing result is: " << testTiming.time() << " us." << std::endl;
+    testTiming.startCPUTiming();
+    sleep(1);
+    testTiming.stopCPUTiming();
+    std::cout << "CPU Timing result is: " << testTiming.CPUTime() << " us." << std::endl;
 }

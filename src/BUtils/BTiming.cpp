@@ -51,11 +51,16 @@ void BTiming::start() {
 }
 
 void BTiming::stop() {
-    m_private_ptr->m_stop_time_us = steady_clock::now();
+    if (m_private_ptr->m_status == BTiming::Timing) {
+        m_private_ptr->m_status = BTiming::Stop;
+        m_private_ptr->m_stop_time_us = steady_clock::now();
+    }
 }
 
 int64 BTiming::time() const {
-    if (m_private_ptr->m_stop_time_us < m_private_ptr->m_start_time_us) {
+    if (m_private_ptr->m_status != BTiming::Stop) {
+        return 0;
+    } else if (m_private_ptr->m_stop_time_us < m_private_ptr->m_start_time_us) {
         return std::chrono::microseconds().zero().count();
     } else {
         return duration_cast<microseconds>(
@@ -79,14 +84,22 @@ void BTiming::stopCPUTiming() {
 }
 
 int64 BTiming::CPUTime() const {
-    return 1000000*(m_private_ptr->m_cpu_time_stop
-    - m_private_ptr->m_cpu_time_start)/CLOCKS_PER_SEC;
+    if (m_private_ptr->m_status != BTiming::Stop) {
+        return 0;
+    } else if (m_private_ptr->m_cpu_time_stop <
+                m_private_ptr->m_cpu_time_start) {
+        return 0;
+    } else {
+        return 1000000*(m_private_ptr->m_cpu_time_stop
+        - m_private_ptr->m_cpu_time_start)/CLOCKS_PER_SEC;
+    }
 }
 // End of BTiming implementation
 
 
 // Start implementation of BTimingPrivate
-BTimingPrivate::BTimingPrivate() {
+BTimingPrivate::BTimingPrivate()
+    : m_status(BTiming::Stop) {
 }
 
 BTimingPrivate::~BTimingPrivate() {
