@@ -23,25 +23,25 @@
 
 /*
  * @Author      : Ball Chang
- * @File        : BTimerPrivate.h
- * @Date        : 2019-4-3
+ * @File        : BTimerEvent.h
+ * @Date        : 2019-4-8
 */
 
-#ifndef INCLUDE_BUTILS_BTIMERPRIVATE_H_
-#define INCLUDE_BUTILS_BTIMERPRIVATE_H_
+#ifndef INCLUDE_BUTILS_BTIMEREVENT_H_
+#define INCLUDE_BUTILS_BTIMEREVENT_H_
 
 #include "BCore/BCore.h"
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
 
 namespace BUtils {
-using namespace BCore;
+    using namespace BCore;
 
-class BTimerPrivate {
- public:
+    class BTimerEvent {
+    public:
 
-};
+    };
 
 }  // namespace BUtils
 
-#endif  // INCLUDE_BUTILS_BTIMERPRIVATE_H_
+#endif  // INCLUDE_BUTILS_BTIMEREVENT_H_

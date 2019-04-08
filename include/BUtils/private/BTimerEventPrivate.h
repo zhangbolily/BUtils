@@ -23,12 +23,15 @@
 
 /*
  * @Author      : Ball Chang
- * @File        : BTimerPrivate.h
- * @Date        : 2019-4-3
+ * @File        : BTimerEventPrivate.h
+ * @Date        : 2019-4-8
 */
 
-#ifndef INCLUDE_BUTILS_BTIMERPRIVATE_H_
-#define INCLUDE_BUTILS_BTIMERPRIVATE_H_
+#ifndef INCLUDE_BUTILS_BTIMEREVENTPRIVATE_H_
+#define INCLUDE_BUTILS_BTIMEREVENTPRIVATE_H_
+
+#include <chrono>
+#include <functional>
 
 #include "BCore/BCore.h"
 #include "BCore/BDebug.h"
@@ -36,12 +39,35 @@
 
 namespace BUtils {
 using namespace BCore;
+using std::function;
+using std::chrono::milliseconds;
 
-class BTimerPrivate {
+class BTimerEventPrivate {
  public:
+    explicit BTimerEventPrivate() noexcept;
+    ~BTimerEventPrivate();
 
+    bool isSingleShot();
+    int32 counter();
+    int32 interval();
+    int32 timeout();
+    std::function<void()> action();
+    void setAction(std::function<void()> timer_action);
+    void setCounter(int32 _count);
+    void setInterval(int32 _interval);
+    void setInterval(std::chrono::milliseconds _interval);
+    void setTimeout(int32 _timeout);
+    void setTimeout(std::chrono::milliseconds _timeout);
+    void setSingleShot(bool singleshot);
+
+ private:
+    int32 m_counter;
+    bool m_is_single_shot;
+    std::chrono::milliseconds m_interval;
+    std::chrono::milliseconds m_timeout;
+    std::function<void()> m_action;
 };
 
 }  // namespace BUtils
 
-#endif  // INCLUDE_BUTILS_BTIMERPRIVATE_H_
+#endif  // INCLUDE_BUTILS_BTIMEREVENTPRIVATE_H_
