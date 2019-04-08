@@ -94,6 +94,13 @@ int64 BTiming::CPUTime() const {
         - m_private_ptr->m_cpu_time_start)/CLOCKS_PER_SEC;
     }
 }
+
+bool BTiming::isActive() {
+    if (m_private_ptr->m_status != BTiming::Stop)
+        return true;
+    else
+        return false;
+}
 // End of BTiming implementation
 
 

@@ -57,6 +57,7 @@ class BTiming {
     void stop();
     void startCPUTiming();
     void stopCPUTiming();
+    bool isActive();
     int64 time() const;
     int64 CPUTime() const;
 
