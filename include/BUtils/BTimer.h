@@ -24,7 +24,7 @@
 /*
  * @Author      : Ball Chang
  * @File        : BTimer.h
- * @Date        : 2018-12-19
+ * @Date        : 2019-4-9
 */
 
 #ifndef INCLUDE_BUTILS_BTIMER_H_
@@ -40,12 +40,16 @@
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
 
+#include <functional>
+
 namespace BUtils {
 
 using namespace BCore;
 using std::chrono::steady_clock;
-using std::chrono::duration_cast;
 using std::chrono::microseconds;
+using std::chrono::duration_cast;
+
+class BTimerPrivate;
 
 class BTimer{
     enum BTimerStatus {
@@ -54,11 +58,28 @@ class BTimer{
     };
 
  public:
-    BTimer();
+    explicit BTimer() noexcept;
     ~BTimer();
 
     void start();
     void stop();
+    bool isActive();
+    bool isSingleShot();
+    int32 id();
+    int32 interval();
+    int32 timeout();
+    void setId(int32 _id);
+    void setActive(bool _active);
+    void callOnInterval(std::function<void()> timer_action);
+    void callOnTimeout(std::function<void()> timer_action);
+    void setInterval(int32 _interval);
+    void setInterval(std::chrono::milliseconds _interval);
+    void setTimeout(int32 _timeout);
+    void setTimeout(std::chrono::milliseconds _timeout);
+    void setSingleShot(bool singleshot);
+
+ protected:
+    BTimerPrivate* m_private_ptr;
 
 };
 }  // namespace BThreadPack

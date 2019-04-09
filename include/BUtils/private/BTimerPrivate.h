@@ -33,13 +33,39 @@
 #include "BCore/BCore.h"
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
+#include "BUtils/BTimerEvent.h"
+
+#include <list>
+#include <queue>
+#include <thread>
+#include <atomic>
 
 namespace BUtils {
 using namespace BCore;
+using std::list;
+using std::thread;
+using std::atomic_int32_t;
+using std::priority_queue;
 
 class BTimerPrivate {
  public:
+    explicit BTimerPrivate() noexcept;
+    ~BTimerPrivate();
 
+    int32           m_status;
+    BTimerEvent*    m_timer_event;
+
+    static thread*      m_timer_thread;
+    static atomic_int32_t   m_ref_count;
+    static atomic_int32_t   m_max_id;
+    static priority_queue
+            <int32, list<BTimerEvent*>, std::greater<int32>>
+            m_timer_event_queue;
+    static int32 createID();
+    static void insertTimerEvent(BTimerEvent* timer_event);
+    static void deleteTimerEvent(BTimerEvent* timer_event);
+    static void updateEventQueue();
+    static void eventLoop();
 };
 
 }  // namespace BUtils

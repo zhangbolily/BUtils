@@ -31,6 +31,7 @@
 #define INCLUDE_BUTILS_BTIMEREVENTPRIVATE_H_
 
 #include <chrono>
+#include <atomic>
 #include <functional>
 
 #include "BCore/BCore.h"
@@ -40,6 +41,8 @@
 namespace BUtils {
 using namespace BCore;
 using std::function;
+using std::atomic_bool;
+using std::atomic_int32_t;
 using std::chrono::milliseconds;
 
 class BTimerEventPrivate {
@@ -47,25 +50,14 @@ class BTimerEventPrivate {
     explicit BTimerEventPrivate() noexcept;
     ~BTimerEventPrivate();
 
-    bool isSingleShot();
-    int32 counter();
-    int32 interval();
-    int32 timeout();
-    std::function<void()> action();
-    void setAction(std::function<void()> timer_action);
-    void setCounter(int32 _count);
-    void setInterval(int32 _interval);
-    void setInterval(std::chrono::milliseconds _interval);
-    void setTimeout(int32 _timeout);
-    void setTimeout(std::chrono::milliseconds _timeout);
-    void setSingleShot(bool singleshot);
-
- private:
-    int32 m_counter;
-    bool m_is_single_shot;
+    atomic_int32_t m_id;
+    atomic_int32_t m_counter;
+    atomic_bool m_is_active;
+    atomic_bool m_is_single_shot;
     std::chrono::milliseconds m_interval;
     std::chrono::milliseconds m_timeout;
-    std::function<void()> m_action;
+    std::function<void()> m_interval_action;
+    std::function<void()> m_timeout_action;
 };
 
 }  // namespace BUtils

@@ -34,13 +34,40 @@
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
 
+#include <functional>
+
 namespace BUtils {
-    using namespace BCore;
+using namespace BCore;
 
-    class BTimerEvent {
-    public:
+class BTimerEventPrivate;
 
-    };
+class BTimerEvent {
+ public:
+    explicit BTimerEvent() noexcept;
+    ~BTimerEvent();
+
+    bool isActive();
+    bool isSingleShot();
+    int32 id();
+    int32 counter();
+    int32 interval();
+    int32 timeout();
+    std::function<void()> intervalAction();
+    std::function<void()> timeoutAction();
+    void setId(int32 _id);
+    void setActive(bool _active);
+    void setTimeoutAction(std::function<void()> timer_action);
+    void setIntervalAction(std::function<void()> timer_action);
+    void setCounter(int32 _count);
+    void setInterval(int32 _interval);
+    void setInterval(std::chrono::milliseconds _interval);
+    void setTimeout(int32 _timeout);
+    void setTimeout(std::chrono::milliseconds _timeout);
+    void setSingleShot(bool singleshot);
+
+ protected:
+    BTimerEventPrivate* m_private_ptr;
+};
 
 }  // namespace BUtils
 
