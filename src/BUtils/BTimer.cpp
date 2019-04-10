@@ -27,8 +27,8 @@
  * @Date        : 2018-12-19
 */
 
-#include "BUtils/BTimer.h"
 #include "BUtils/private/BTimerPrivate.h"
+#include "BUtils/BTimer.h"
 
 namespace BUtils {
 
@@ -110,6 +110,13 @@ void BTimer::setSingleShot(bool singleshot) {
 
 // Start implementation of BTimerPrivate
 
+thread*         BTimerPrivate::m_timer_thread = nullptr;
+atomic_int32_t  BTimerPrivate::m_max_id(0);
+atomic_int32_t  BTimerPrivate::m_ref_count(0);
+priority_queue
+<int32, list<BTimerEvent*>, std::greater<int32>>
+                BTimerPrivate::m_timer_event_queue;
+
 BTimerPrivate::BTimerPrivate() noexcept
     : m_timer_event(new BTimerEvent()) {
     if (m_ref_count == 0) {
@@ -133,7 +140,7 @@ int32 BTimerPrivate::createID() {
 }
 
 void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
-    m_timer_event_queue.push(timer_event);
+    //m_timer_event_queue.push(0, timer_event);
 }
 
 void BTimerPrivate::deleteTimerEvent(BTimerEvent* timer_event) {

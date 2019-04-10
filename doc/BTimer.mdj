@@ -575,23 +575,6 @@
 									"subViews": [
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFp445X7ngxE+I=",
-											"_parent": {
-												"$ref": "AAAAAAFp4420x3gHldI="
-											},
-											"model": {
-												"$ref": "AAAAAAFp44J6BXb0OPE="
-											},
-											"font": "Arial;16;0",
-											"left": 141,
-											"top": 113,
-											"width": 263,
-											"height": 16,
-											"text": "-m_counter: long long = 0",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
 											"_id": "AAAAAAFp45QpMHkb3ZU=",
 											"_parent": {
 												"$ref": "AAAAAAFp4420x3gHldI="
@@ -601,7 +584,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 131,
+											"top": 113,
 											"width": 263,
 											"height": 16,
 											"underline": true,
@@ -619,7 +602,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 149,
+											"top": 131,
 											"width": 263,
 											"height": 16,
 											"text": "+m_status: int32",
@@ -636,7 +619,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 167,
+											"top": 149,
 											"width": 263,
 											"height": 16,
 											"text": "+m_timer_event: BTimerEvent",
@@ -653,7 +636,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 185,
+											"top": 167,
 											"width": 263,
 											"height": 16,
 											"text": "-m_timer_thread: BThread",
@@ -670,7 +653,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 203,
+											"top": 185,
 											"width": 263,
 											"height": 16,
 											"underline": true,
@@ -682,7 +665,7 @@
 									"left": 136,
 									"top": 108,
 									"width": 273,
-									"height": 116
+									"height": 98
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -705,7 +688,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 229,
+											"top": 211,
 											"width": 263,
 											"height": 16,
 											"text": "+BTimerPrivate()",
@@ -722,7 +705,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 247,
+											"top": 229,
 											"width": 263,
 											"height": 16,
 											"text": "+~BTimerPrivate()",
@@ -739,7 +722,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 265,
+											"top": 247,
 											"width": 263,
 											"height": 16,
 											"underline": true,
@@ -757,7 +740,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 283,
+											"top": 265,
 											"width": 263,
 											"height": 16,
 											"underline": true,
@@ -775,7 +758,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 301,
+											"top": 283,
 											"width": 263,
 											"height": 16,
 											"underline": true,
@@ -793,7 +776,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 141,
-											"top": 319,
+											"top": 301,
 											"width": 263,
 											"height": 16,
 											"underline": true,
@@ -803,7 +786,7 @@
 									],
 									"font": "Arial;16;0",
 									"left": 136,
-									"top": 224,
+									"top": 206,
 									"width": 273,
 									"height": 116
 								},
@@ -1011,7 +994,7 @@
 											"top": 621,
 											"width": 343,
 											"height": 16,
-											"text": "-m_action: function",
+											"text": "-m_timeout_action: function",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1030,13 +1013,30 @@
 											"height": 16,
 											"text": "-m_counter: int32",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFqAonsp8Rkc1k=",
+											"_parent": {
+												"$ref": "AAAAAAFp46nh33nHYVM="
+											},
+											"model": {
+												"$ref": "AAAAAAFqAonskMRhdKA="
+											},
+											"font": "Arial;16;0",
+											"left": 117,
+											"top": 657,
+											"width": 343,
+											"height": 16,
+											"text": "-m_interval_action: function",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;16;0",
 									"left": 112,
 									"top": 580,
 									"width": 353,
-									"height": 80
+									"height": 98
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1059,7 +1059,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 665,
+											"top": 683,
 											"width": 343,
 											"height": 16,
 											"text": "+BTimerEvent()",
@@ -1076,7 +1076,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 683,
+											"top": 701,
 											"width": 343,
 											"height": 16,
 											"text": "+~BTimerEvent()",
@@ -1093,7 +1093,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 701,
+											"top": 719,
 											"width": 343,
 											"height": 16,
 											"text": "+interval()",
@@ -1110,7 +1110,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 719,
+											"top": 737,
 											"width": 343,
 											"height": 16,
 											"text": "+setInterval(msec: int32)",
@@ -1127,7 +1127,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 737,
+											"top": 755,
 											"width": 343,
 											"height": 16,
 											"text": "+setInterval(msec: std::chrono::milliseconds)",
@@ -1144,7 +1144,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 755,
+											"top": 773,
 											"width": 343,
 											"height": 16,
 											"text": "+timeout()",
@@ -1161,7 +1161,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 773,
+											"top": 791,
 											"width": 343,
 											"height": 16,
 											"text": "+setTimeout(msec: int32)",
@@ -1178,7 +1178,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 791,
+											"top": 809,
 											"width": 343,
 											"height": 16,
 											"text": "+setTimeout(msec: std::chrono::milliseconds)",
@@ -1195,7 +1195,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 809,
+											"top": 827,
 											"width": 343,
 											"height": 16,
 											"text": "+isSingleShot()",
@@ -1212,7 +1212,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 827,
+											"top": 845,
 											"width": 343,
 											"height": 16,
 											"text": "+setSingleShot(singleShot: bool)",
@@ -1229,7 +1229,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 845,
+											"top": 863,
 											"width": 343,
 											"height": 16,
 											"text": "+action()",
@@ -1246,7 +1246,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 863,
+											"top": 881,
 											"width": 343,
 											"height": 16,
 											"text": "+setAction(action: function)",
@@ -1263,7 +1263,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 881,
+											"top": 899,
 											"width": 343,
 											"height": 16,
 											"text": "+setCounter()",
@@ -1280,7 +1280,7 @@
 											},
 											"font": "Arial;16;0",
 											"left": 117,
-											"top": 899,
+											"top": 917,
 											"width": 343,
 											"height": 16,
 											"text": "+counter()",
@@ -1289,7 +1289,7 @@
 									],
 									"font": "Arial;16;0",
 									"left": 112,
-									"top": 660,
+									"top": 678,
 									"width": 353,
 									"height": 260
 								},
@@ -1331,7 +1331,7 @@
 							"left": 112,
 							"top": 552,
 							"width": 353,
-							"height": 368,
+							"height": 386,
 							"nameCompartment": {
 								"$ref": "AAAAAAFp46nh33nC2GM="
 							},
@@ -2226,18 +2226,6 @@
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAFp44J6BXb0OPE=",
-							"_parent": {
-								"$ref": "AAAAAAFp4420xnf/R8U="
-							},
-							"name": "m_counter",
-							"documentation": "Use this member to count the time.",
-							"visibility": "private",
-							"type": "long long",
-							"defaultValue": "0"
-						},
-						{
-							"_type": "UMLAttribute",
 							"_id": "AAAAAAFp45Qo6XkYV5c=",
 							"_parent": {
 								"$ref": "AAAAAAFp4420xnf/R8U="
@@ -2378,7 +2366,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFp46nh33m/GLk="
 							},
-							"name": "m_action",
+							"name": "m_timeout_action",
 							"visibility": "private",
 							"type": "function"
 						},
@@ -2391,6 +2379,16 @@
 							"name": "m_counter",
 							"visibility": "private",
 							"type": "int32"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFqAonskMRhdKA=",
+							"_parent": {
+								"$ref": "AAAAAAFp46nh33m/GLk="
+							},
+							"name": "m_interval_action",
+							"visibility": "private",
+							"type": "function"
 						}
 					],
 					"operations": [
