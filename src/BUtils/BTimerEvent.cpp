@@ -43,35 +43,43 @@ BTimerEvent::~BTimerEvent() {
     }
 }
 
-int32 BTimerEvent::id() {
+bool BTimerEvent::operator>(const BTimerEvent& revent) const {
+    return this->counter() > revent.counter();
+}
+
+bool BTimerEvent::operator<(const BTimerEvent& revent) const {
+    return this->counter() < revent.counter();
+}
+
+int32 BTimerEvent::id() const {
     return m_private_ptr->m_id;
 }
 
-bool BTimerEvent::isActive() {
+bool BTimerEvent::isActive() const {
     return m_private_ptr->m_is_active;
 }
 
-bool BTimerEvent::isSingleShot() {
+bool BTimerEvent::isSingleShot() const {
     return m_private_ptr->m_is_single_shot;
 }
 
-int32 BTimerEvent::counter() {
+int32 BTimerEvent::counter() const {
     return m_private_ptr->m_counter;
 }
 
-int32 BTimerEvent::interval() {
+int32 BTimerEvent::interval() const {
     return m_private_ptr->m_interval.count();
 }
 
-int32 BTimerEvent::timeout() {
+int32 BTimerEvent::timeout() const {
     return m_private_ptr->m_timeout.count();
 }
 
-std::function<void()> BTimerEvent::intervalAction() {
+std::function<void()> BTimerEvent::intervalAction() const {
     return m_private_ptr->m_interval_action;
 }
 
-std::function<void()> BTimerEvent::timeoutAction() {
+std::function<void()> BTimerEvent::timeoutAction() const {
     return m_private_ptr->m_timeout_action;
 }
 
@@ -122,7 +130,9 @@ BTimerEventPrivate::BTimerEventPrivate() noexcept
     : m_is_single_shot(false),
       m_interval(0),
       m_timeout(0),
-      m_counter(0) {
+      m_counter(0),
+      m_interval_action(nullptr),
+      m_timeout_action(nullptr){
 
 }
 

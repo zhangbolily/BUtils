@@ -46,14 +46,16 @@ class BTimerEvent {
     explicit BTimerEvent() noexcept;
     ~BTimerEvent();
 
-    bool isActive();
-    bool isSingleShot();
-    int32 id();
-    int32 counter();
-    int32 interval();
-    int32 timeout();
-    std::function<void()> intervalAction();
-    std::function<void()> timeoutAction();
+    bool operator>(const BTimerEvent& revent) const;
+    bool operator<(const BTimerEvent& revent) const;
+    bool isActive() const;
+    bool isSingleShot() const;
+    int32 id() const;
+    int32 counter() const;
+    int32 interval() const;
+    int32 timeout() const;
+    std::function<void()> intervalAction() const;
+    std::function<void()> timeoutAction() const;
     void setId(int32 _id);
     void setActive(bool _active);
     void setTimeoutAction(std::function<void()> timer_action);

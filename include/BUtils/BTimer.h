@@ -40,6 +40,7 @@
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
 
+#include <algorithm>
 #include <functional>
 
 namespace BUtils {
@@ -82,6 +83,6 @@ class BTimer{
     BTimerPrivate* m_private_ptr;
 
 };
-}  // namespace BThreadPack
+}  // namespace BUtils
 
 #endif  // INCLUDE_BUTILS_BTIMER_H_
