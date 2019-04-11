@@ -49,8 +49,8 @@ void BTimer::start() {
 }
 
 void BTimer::stop() {
-    setActive(false);
     m_private_ptr->deleteTimerEvent(m_private_ptr->m_timer_event);
+    setActive(false);
 }
 
 bool BTimer::isActive() {
@@ -83,13 +83,7 @@ void BTimer::setId(int32 _id) {
 }
 
 void BTimer::setActive(bool _active) {
-    if (isActive()) {
-        stop();
-        m_private_ptr->m_timer_event->setActive(_active);
-        start();
-    } else {
-        m_private_ptr->m_timer_event->setActive(_active);
-    }
+    m_private_ptr->m_timer_event->setActive(_active);
 }
 
 void BTimer::callOnInterval(std::function<void()> timer_action) {
@@ -220,7 +214,9 @@ void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
 	std::chrono::microseconds wait_us(100);
 	while(true) {
 		if (m_event_mutex.try_lock()) {
-            m_timer_event_list_map[timer_event->interval() + m_counter]
+            int32 event_list_index = timer_event->interval() + m_counter;
+            timer_event->setCounter(event_list_index);
+            m_timer_event_list_map[event_list_index]
             .push_back(timer_event);
     		m_event_mutex.unlock();
     		return;
@@ -235,17 +231,27 @@ void BTimerPrivate::deleteTimerEvent(BTimerEvent* timer_event) {
     std::chrono::microseconds wait_us(100);
     while (true) {
         if (m_event_mutex.try_lock()) {
-            int32 event_list_index = timer_event->interval() + m_counter;
-            auto event_list = m_timer_event_list_map[event_list_index];
-            auto it = std::find(event_list.begin(), event_list.end(), timer_event);
-            event_list.erase(it);
+            int32 event_list_index = timer_event->counter();
+            auto& event_list = m_timer_event_list_map[event_list_index];
+            std::list<BTimerEvent*>::iterator it =
+                    std::find(event_list.begin(), event_list.end(), timer_event);
+
+            if (it != event_list.end()) {
+                event_list.erase(it);
+                B_PRINT_DEBUG("BTimerPrivate::deleteTimerEvent erased a timer event."
+                              "Timer id is: " << (*it)->id())
+            } else {
+                B_PRINT_DEBUG("BTimerPrivate::deleteTimerEvent Don't find "
+                              "specified timer according to the counter index: "
+                              << event_list_index)
+            }
+
             if (event_list.empty()) {
                 m_timer_event_list_map.erase(event_list_index);
             }
             m_event_mutex.unlock();
             return;
         } else {
-            m_event_mutex.unlock();
             std::this_thread::sleep_for(wait_us);
         }
     }
@@ -290,7 +296,7 @@ void BTimerPrivate::eventLoop() {
             if (event_list.empty()) {
             	B_PRINT_DEBUG("BTimerPrivate::eventLoop is empty."
                            " Remove from event map.")
-                m_timer_event_list_map.erase(m_timer_event_list_map.begin());
+                m_timer_event_list_map.erase(event_list_pair);
             }
         }
         

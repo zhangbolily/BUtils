@@ -37,16 +37,16 @@
 #include "BUtils/BTiming.h"
 #include "BUtils/BTimer.h"
 
-void timerAction() {
-	std::cout << "Timer 1 It works!" << std::endl;
+void action1() {
+	std::cout << "I'm action 1" << std::endl;
 }
 
-void timeoutAction() {
-	std::cout << "Timer 2 It works!" << std::endl;
+void action2() {
+	std::cout << "I'm action 2" << std::endl;
 }
 
-void intervalAction() {
-	std::cout << "I'm Repeater. I'm Repeater." << std::endl;
+void action3() {
+	std::cout << "I'm action 3" << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -91,14 +91,18 @@ int main(int argc, char** argv) {
     std::cout << "Testing BTimer, id: " << testTimer2.id() << std::endl;
     testTimer1.setInterval(1000);
     testTimer1.setTimeout(5000);
-    testTimer1.callOnTimeout(timerAction);
+    testTimer1.callOnTimeout(action1);
     testTimer1.start();
     
     testTimer2.setInterval(1000);
     testTimer2.setTimeout(5000);
-    testTimer2.callOnInterval(intervalAction);
-    testTimer2.callOnTimeout(timeoutAction);
+    testTimer2.callOnInterval(action2);
+    testTimer2.callOnTimeout(action3);
     testTimer2.start();
+
+    sleep(3);
+
+    testTimer2.stop();
     
-    sleep(100);
+    sleep(20);
 }
