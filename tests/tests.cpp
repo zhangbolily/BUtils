@@ -33,8 +33,13 @@
 #include <unistd.h>
 
 #include "BUtils/BUtils.h"
-#include "BUtils/BTiming.h"
 #include "BCore/BDebug.h"
+#include "BUtils/BTiming.h"
+#include "BUtils/BTimer.h"
+
+void timerAction() {
+	std::cout << "It works!" << std::endl;
+}
 
 int main(int argc, char** argv) {
     using namespace BCore;
@@ -71,4 +76,13 @@ int main(int argc, char** argv) {
     sleep(1);
     testTiming.stopCPUTiming();
     std::cout << "CPU Timing result is: " << testTiming.CPUTime() << " us." << std::endl;
+    
+    std::cout << "Testing BTimer" << std::endl;
+    BTimer testTimer;
+    testTimer.setInterval(1000);
+    testTimer.setTimeout(5000);
+    testTimer.callOnTimeout(timerAction);
+    testTimer.start();
+    
+    while(1);
 }

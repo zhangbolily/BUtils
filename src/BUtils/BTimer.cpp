@@ -45,10 +45,12 @@ BTimer::~BTimer() {
 
 void BTimer::start() {
     setActive(true);
+    m_private_ptr->insertTimerEvent(m_private_ptr->m_timer_event);
 }
 
 void BTimer::stop() {
     setActive(false);
+    m_private_ptr->deleteTimerEvent(m_private_ptr->m_timer_event);
 }
 
 bool BTimer::isActive() {
@@ -253,9 +255,19 @@ void BTimerPrivate::setPrecision(int32) {
 }
 
 void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
-    BTimerEventList& event_list =
-            m_timer_event_queue.getEventList(timer_event->interval());
-    event_list.push_back(timer_event);
+	std::chrono::microseconds wait_us(100);
+	while(true) {
+		if (m_event_mutex.try_lock()) {
+			BTimerEventList& event_list =
+            	m_timer_event_queue.getEventList(timer_event->interval());
+    		event_list.push_back(timer_event);
+    		m_event_mutex.unlock();
+    		return;
+		} else {
+			m_event_mutex.unlock();
+			std::this_thread::sleep_for(wait_us);
+		}
+	}
 }
 
 void BTimerPrivate::deleteTimerEvent(BTimerEvent* timer_event) {
@@ -280,12 +292,13 @@ void BTimerPrivate::eventLoop() {
             m_timer_event_queue.pop();
 
             m_action_mutex.lock();
-            for (auto it = event_list.begin(); it != event_list.end(); it++) {
+            for (BTimerEventList::iterator it = event_list.begin(); it != event_list.end(); it++) {
                 if ((*it)->timeout() < (*it)->interval()) {
                     if ((*it)->timeoutAction()) {
                         m_action_queue.push((*it)->timeoutAction());
                     }
-                    event_list.erase(it);
+                    it = event_list.erase(it);
+                    //event_list.clear();
                 } else {
                     (*it)->setTimeout((*it)->timeout() - (*it)->interval());
                     if ((*it)->intervalAction()) {
@@ -300,8 +313,9 @@ void BTimerPrivate::eventLoop() {
                 event_list_pair.first += event_list.front()->interval();
                 m_timer_event_queue.push(event_list_pair);
             }
-            m_event_mutex.unlock();
         }
+        
+        m_event_mutex.unlock();
         std::chrono::milliseconds sleep_ms(m_timer_precision);
         std::this_thread::sleep_for(sleep_ms);
         m_counter += m_timer_precision;
@@ -309,18 +323,19 @@ void BTimerPrivate::eventLoop() {
 }
 
 void BTimerPrivate::actionTrigger() {
+    std::chrono::microseconds wait_us(100);
     while(true) {
         std::unique_lock<std::mutex> lock(m_action_mutex);
-        m_action_cond.wait(lock);
+        m_action_cond.wait_for(lock, wait_us);
 
         while(!m_action_queue.empty()) {
             if (m_action_mutex.try_lock()) {
                 m_action_queue.front()();
+                B_PRINT_DEBUG("BTimerPrivate::actionTrigger called an action.")
                 m_action_queue.pop();
                 m_action_mutex.unlock();
             } else {
-                std::chrono::microseconds sleep_us(100);
-                std::this_thread::sleep_for(sleep_us);
+            	m_action_mutex.unlock();
             }
         }
     }
