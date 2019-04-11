@@ -215,6 +215,7 @@ atomic_int  	BTimerPrivate::m_max_id(0);
 atomic_int  	BTimerPrivate::m_ref_count(0);
 atomic_long  	BTimerPrivate::m_counter(0);
 queue<std::function<void()> > BTimerPrivate::m_action_queue;
+map<int32, std::list<BTimerEvent*>> BTimerPrivate::m_timer_event_list_map;
 BTimerPriorityQueue     BTimerPrivate::m_timer_event_queue;
 
 BTimerPrivate::BTimerPrivate() noexcept
@@ -258,9 +259,8 @@ void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
 	std::chrono::microseconds wait_us(100);
 	while(true) {
 		if (m_event_mutex.try_lock()) {
-			BTimerEventList& event_list =
-            	m_timer_event_queue.getEventList(timer_event->interval());
-    		event_list.push_back(timer_event);
+            m_timer_event_list_map[timer_event->interval() + m_counter]
+            .push_back(timer_event);
     		m_event_mutex.unlock();
     		return;
 		} else {
@@ -271,30 +271,38 @@ void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
 }
 
 void BTimerPrivate::deleteTimerEvent(BTimerEvent* timer_event) {
-    BTimerEventList& event_list =
-            m_timer_event_queue.getEventList(timer_event->interval());
-    auto it = std::find(event_list.begin(), event_list.end(), timer_event);
-    event_list.erase(it);
-}
-
-void BTimerPrivate::updateEventQueue() {
-    m_timer_event_queue.updateQueue();
+    std::chrono::microseconds wait_us(100);
+    while (true) {
+        if (m_event_mutex.try_lock()) {
+            int32 event_list_index = timer_event->interval() + m_counter;
+            auto event_list = m_timer_event_list_map[event_list_index];
+            auto it = std::find(event_list.begin(), event_list.end(), timer_event);
+            event_list.erase(it);
+            if (event_list.empty()) {
+                m_timer_event_list_map.erase(event_list_index);
+            }
+            m_event_mutex.unlock();
+            return;
+        } else {
+            m_event_mutex.unlock();
+            std::this_thread::sleep_for(wait_us);
+        }
+    }
 }
 
 void BTimerPrivate::eventLoop() {
     while(m_is_active) {
         m_event_mutex.lock();
 
-        if (!m_timer_event_queue.empty()
-            && (m_counter - m_timer_event_queue.top().first) >= 0) {
-            B_PRINT_DEBUG("BTimerPrivate::eventLoop interval occred. Counter value is "
+        if (!m_timer_event_list_map.empty()
+            && (m_counter - m_timer_event_list_map.begin()->first) >= 0) {
+            B_PRINT_DEBUG("BTimerPrivate::eventLoop interval occured. Counter value is "
             				<< m_counter << " ms")
-            auto event_list_pair = m_timer_event_queue.top();
-            auto& event_list = event_list_pair.second;
-            m_timer_event_queue.pop();
+            auto event_list_pair = m_timer_event_list_map.begin();
+            auto& event_list = event_list_pair->second;
 
             m_action_mutex.lock();
-            for (BTimerEventList::iterator it = event_list.begin(); it != event_list.end();) {
+            for (auto it = event_list.begin(); it != event_list.end();) {
                 if ((*it)->timeout() < (*it)->interval()) {
                 	B_PRINT_DEBUG("BTimerPrivate::eventLoop timeout occred. Timer info: ["
             						<< "ID: " << (*it)->id()
@@ -302,26 +310,26 @@ void BTimerPrivate::eventLoop() {
                     if ((*it)->timeoutAction()) {
                         m_action_queue.push((*it)->timeoutAction());
                     }
-                    
-                    it = event_list.erase(it);
                 } else {
                     (*it)->setTimeout((*it)->timeout() - (*it)->interval());
                     if ((*it)->intervalAction()) {
                         m_action_queue.push((*it)->intervalAction());
                     }
-                    it++;
+                    // All of events in this list are expired.
+                    // Reinsert them into event queue.
+                    insertTimerEvent(*it);
                 }
+                it = event_list.erase(it);
             }
             B_PRINT_DEBUG("BTimerPrivate::eventLoop action queue has "
     						<< m_action_queue.size() << " actions")
             m_action_mutex.unlock();
             m_action_cond.notify_one();
 
-            if (!event_list.empty()) {
-            	B_PRINT_DEBUG("BTimerPrivate::eventLoop still has event in list. Event number is "
-            					<< event_list.size())
-                event_list_pair.first += event_list.front()->interval();
-                m_timer_event_queue.push(event_list_pair);
+            if (event_list.empty()) {
+            	B_PRINT_DEBUG("BTimerPrivate::eventLoop is empty."
+                           " Remove from event map.")
+                m_timer_event_list_map.erase(m_timer_event_list_map.begin());
             }
         }
         

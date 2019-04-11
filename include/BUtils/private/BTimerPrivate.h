@@ -36,6 +36,7 @@
 #include "BUtils/BTimerEvent.h"
 
 #include <list>
+#include <map>
 #include <utility>
 #include <queue>
 #include <vector>
@@ -46,6 +47,7 @@
 
 namespace BUtils {
 using namespace BCore;
+using std::map;
 using std::list;
 using std::pair;
 using std::queue;
@@ -95,7 +97,6 @@ class BTimerPrivate {
     explicit BTimerPrivate() noexcept;
     ~BTimerPrivate();
 
-    int32           m_status;
     BTimerEvent*    m_timer_event;
 
     static thread*      m_event_loop_thread;
@@ -109,13 +110,13 @@ class BTimerPrivate {
     static atomic_int   m_ref_count;
     static atomic_int   m_max_id;
     static queue<std::function<void()> > m_action_queue;
+    static map<int32, std::list<BTimerEvent*>> m_timer_event_list_map;
     static BTimerPriorityQueue m_timer_event_queue;
     static int32 createID();
     static int32 precision();
     static void setPrecision(int32);
     static void insertTimerEvent(BTimerEvent* timer_event);
     static void deleteTimerEvent(BTimerEvent* timer_event);
-    static void updateEventQueue();
     static void eventLoop();
     static void actionTrigger();
 };
