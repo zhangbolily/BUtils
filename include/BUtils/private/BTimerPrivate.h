@@ -82,6 +82,7 @@ class BTimerPrivate {
     static int32 precision();
     static void setPrecision(int32);
     static void insertTimerEvent(BTimerEvent* timer_event);
+    static void insertTimerEvent(int32 counter_index, BTimerEvent* timer_event);
     static void deleteTimerEvent(BTimerEvent* timer_event);
     static void eventLoop();
     static void actionTrigger();

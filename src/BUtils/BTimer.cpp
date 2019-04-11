@@ -72,16 +72,6 @@ int32 BTimer::timeout() {
     return m_private_ptr->m_timer_event->timeout();
 }
 
-void BTimer::setId(int32 _id) {
-    if (isActive()) {
-        stop();
-        m_private_ptr->m_timer_event->setId(_id);
-        start();
-    } else {
-        m_private_ptr->m_timer_event->setId(_id);
-    }
-}
-
 void BTimer::setActive(bool _active) {
     m_private_ptr->m_timer_event->setActive(_active);
 }
@@ -227,6 +217,22 @@ void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
 	}
 }
 
+void BTimerPrivate::insertTimerEvent(int32 counter_index, BTimerEvent* timer_event) {
+    std::chrono::microseconds wait_us(100);
+    while(true) {
+        if (m_event_mutex.try_lock()) {
+            timer_event->setCounter(counter_index);
+            m_timer_event_list_map[counter_index]
+                    .push_back(timer_event);
+            m_event_mutex.unlock();
+            return;
+        } else {
+            m_event_mutex.unlock();
+            std::this_thread::sleep_for(wait_us);
+        }
+    }
+}
+
 void BTimerPrivate::deleteTimerEvent(BTimerEvent* timer_event) {
     std::chrono::microseconds wait_us(100);
     while (true) {
@@ -284,7 +290,12 @@ void BTimerPrivate::eventLoop() {
                     }
                     // All of events in this list are expired.
                     // Reinsert them into event queue.
-                    insertTimerEvent(*it);
+                    if ((*it)->isSingleShot()) {
+                        insertTimerEvent((*it)->timeout(), *it);
+                        (*it)->setTimeout(0);
+                    } else {
+                        insertTimerEvent(*it);
+                    }
                 }
                 it = event_list.erase(it);
             }

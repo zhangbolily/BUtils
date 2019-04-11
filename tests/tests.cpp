@@ -49,6 +49,14 @@ void action3() {
 	std::cout << "I'm action 3" << std::endl;
 }
 
+void action4() {
+    std::cout << "I'm action 4" << std::endl;
+}
+
+void action5() {
+    std::cout << "I'm action 5" << std::endl;
+}
+
 int main(int argc, char** argv) {
     using namespace BCore;
     using namespace BUtils;
@@ -87,6 +95,7 @@ int main(int argc, char** argv) {
     
     BTimer testTimer1;
     BTimer testTimer2;
+    BTimer testTimer3;
     std::cout << "Testing BTimer, id: " << testTimer1.id() << std::endl;
     std::cout << "Testing BTimer, id: " << testTimer2.id() << std::endl;
     testTimer1.setInterval(1000);
@@ -100,6 +109,25 @@ int main(int argc, char** argv) {
     testTimer2.callOnTimeout(action3);
     testTimer2.start();
 
+    testTimer3.setInterval(1000);
+    testTimer3.setTimeout(5000);
+    testTimer3.setSingleShot(true);
+    testTimer3.callOnInterval(action4);
+    testTimer3.callOnTimeout(action5);
+    testTimer3.start();
+
+    sleep(2);
+    std::chrono::milliseconds interval_ms(500);
+    std::chrono::milliseconds timeout_ms(10000);
+    testTimer2.setInterval(interval_ms);
+    testTimer2.setTimeout(timeout_ms);
+
+    std::cout << "Timer: " << testTimer2.id() << " timeout: "
+                << testTimer2.timeout() << std::endl;
+    std::cout << "Timer: " << testTimer2.id() << " interval: "
+              << testTimer2.interval() << std::endl;
+    std::cout << "Timer: " << testTimer2.id() << " isSingleShot: "
+              << testTimer2.isSingleShot() << std::endl;
     sleep(3);
 
     testTimer2.stop();
