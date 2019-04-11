@@ -100,5 +100,5 @@ int main(int argc, char** argv) {
     testTimer2.callOnTimeout(timeoutAction);
     testTimer2.start();
     
-    while(1);
+    sleep(100);
 }

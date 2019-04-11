@@ -24,7 +24,7 @@
 /*
  * @Author      : Ball Chang
  * @File        : BTimer.cpp
- * @Date        : 2018-12-19
+ * @Date        : 2019-4-6
 */
 
 #include "BUtils/private/BTimerPrivate.h"
@@ -73,134 +73,96 @@ int32 BTimer::timeout() {
 }
 
 void BTimer::setId(int32 _id) {
-    m_private_ptr->m_timer_event->setId(_id);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setId(_id);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setId(_id);
+    }
 }
 
 void BTimer::setActive(bool _active) {
-    m_private_ptr->m_timer_event->setActive(_active);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setActive(_active);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setActive(_active);
+    }
 }
 
 void BTimer::callOnInterval(std::function<void()> timer_action) {
-    m_private_ptr->m_timer_event->setIntervalAction(timer_action);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setIntervalAction(timer_action);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setIntervalAction(timer_action);
+    }
 }
 
 void BTimer::callOnTimeout(std::function<void()> timer_action) {
-    m_private_ptr->m_timer_event->setTimeoutAction(timer_action);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setTimeoutAction(timer_action);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setTimeoutAction(timer_action);
+    }
 }
 
 void BTimer::setInterval(int32 _interval) {
-    m_private_ptr->m_timer_event->setInterval(_interval);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setInterval(_interval);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setInterval(_interval);
+    }
 }
 
 void BTimer::setInterval(std::chrono::milliseconds _interval) {
-    m_private_ptr->m_timer_event->setInterval(_interval);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setInterval(_interval);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setInterval(_interval);
+    }
 }
 
 void BTimer::setTimeout(int32 _timeout) {
-    m_private_ptr->m_timer_event->setTimeout(_timeout);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setTimeout(_timeout);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setTimeout(_timeout);
+    }
 }
 
 void BTimer::setTimeout(std::chrono::milliseconds _timeout) {
-    m_private_ptr->m_timer_event->setTimeout(_timeout);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setTimeout(_timeout);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setTimeout(_timeout);
+    }
 }
 
 void BTimer::setSingleShot(bool singleshot) {
-    m_private_ptr->m_timer_event->setSingleShot(singleshot);
+    if (isActive()) {
+        stop();
+        m_private_ptr->m_timer_event->setSingleShot(singleshot);
+        start();
+    } else {
+        m_private_ptr->m_timer_event->setSingleShot(singleshot);
+    }
 }
 
 // End of BTimer implementation
-
-// Start implementation of BTimerEventList
-
-BTimerEventList::BTimerEventList(const BTimerEventList& elist)
-        : list<BTimerEvent*>(std::move(elist)){
-    m_interval.store(elist.m_interval);
-}
-
-BTimerEventList::BTimerEventList(BTimerEventList&& elist)
-        : list<BTimerEvent*>(std::move(elist)){
-    m_interval.store(elist.m_interval);
-}
-
-BTimerEventList& BTimerEventList::operator=(const BTimerEventList& elist) {
-    list<BTimerEvent*>::operator=(std::move(elist));
-    m_interval.store(elist.m_interval);
-
-    return *this;
-}
-
-BTimerEventList& BTimerEventList::operator=(BTimerEventList&& elist) {
-    list<BTimerEvent*>::operator=(std::move(elist));
-    m_interval.store(elist.m_interval);
-
-    return *this;
-}
-
-int32 BTimerEventList::interval() {
-    return m_interval;
-}
-
-void BTimerEventList::setInterval(BCore::int32 _interval) {
-    m_interval = _interval;
-}
-
-// End of BTimerEventList implementation
-
-// Start implementation of BTimerPriorityQueue
-
-BTimerPriorityQueue::BTimerPriorityQueue(const BTimerPriorityQueue& timer_queue)
-        : priority_queue
-              <std::pair<int32, BTimerEventList>,
-              std::vector<std::pair<int32, BTimerEventList>>,
-              std::greater<std::pair<int32, BTimerEventList>>>(std::move(timer_queue)) {
-}
-
-BTimerPriorityQueue::BTimerPriorityQueue(BTimerPriorityQueue&& timer_queue)
-    : priority_queue
-          <std::pair<int32, BTimerEventList>,
-          std::vector<std::pair<int32, BTimerEventList>>,
-          std::greater<std::pair<int32, BTimerEventList>>>(std::move(timer_queue)) {
-}
-
-BTimerPriorityQueue& BTimerPriorityQueue::operator=(const BTimerPriorityQueue& timer_queue) {
-    priority_queue
-            <std::pair<int32, BTimerEventList>,
-                    std::vector<std::pair<int32, BTimerEventList>>,
-                    std::greater<std::pair<int32, BTimerEventList>>>
-    ::operator=(std::move(timer_queue));
-}
-
-BTimerPriorityQueue& BTimerPriorityQueue::operator=(BTimerPriorityQueue&& timer_queue) {
-    priority_queue
-            <std::pair<int32, BTimerEventList>,
-                    std::vector<std::pair<int32, BTimerEventList>>,
-                    std::greater<std::pair<int32, BTimerEventList>>>
-    ::operator=(std::move(timer_queue));
-}
-
-void BTimerPriorityQueue::updateQueue() {
-    std::make_heap(c.begin(), c.end(), comp);
-}
-
-BTimerEventList& BTimerPriorityQueue::getEventList(int32 interval) {
-    BTimerEventList result_event_list;
-    for (auto it = c.begin(); it != c.end(); it++) {
-        if (it->second.interval() == interval) {
-            return it->second;
-        }
-    }
-    // Don't find the correspond list, create a new list.
-    BTimerEventList event_list;
-    event_list.setInterval(interval);
-    emplace(0, std::move(event_list));
-    for (auto it = c.begin(); it != c.end(); it++) {
-        if (it->second.interval() == interval) {
-            return it->second;
-        }
-    }
-}
-
-// End of BTimerPriorityQueue implementation
 
 // Start implementation of BTimerPrivate
 
@@ -216,7 +178,6 @@ atomic_int  	BTimerPrivate::m_ref_count(0);
 atomic_long  	BTimerPrivate::m_counter(0);
 queue<std::function<void()> > BTimerPrivate::m_action_queue;
 map<int32, std::list<BTimerEvent*>> BTimerPrivate::m_timer_event_list_map;
-BTimerPriorityQueue     BTimerPrivate::m_timer_event_queue;
 
 BTimerPrivate::BTimerPrivate() noexcept
     : m_timer_event(new BTimerEvent()) {
@@ -341,10 +302,11 @@ void BTimerPrivate::eventLoop() {
 }
 
 void BTimerPrivate::actionTrigger() {
+    std::chrono::milliseconds wait_ms(100);
     std::chrono::microseconds wait_us(100);
-    while(true) {
+    while(m_is_active) {
         std::unique_lock<std::mutex> lock(m_action_mutex);
-        m_action_cond.wait_for(lock, wait_us);
+        m_action_cond.wait_for(lock, wait_ms);
 
         while(!m_action_queue.empty()) {
             if (m_action_mutex.try_lock()) {
