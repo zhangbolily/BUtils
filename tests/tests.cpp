@@ -90,14 +90,14 @@ int main(int argc, char** argv) {
     std::cout << "Testing BTimer, id: " << testTimer1.id() << std::endl;
     std::cout << "Testing BTimer, id: " << testTimer2.id() << std::endl;
     testTimer1.setInterval(1000);
-    testTimer1.setTimeout(6000);
+    testTimer1.setTimeout(5000);
     testTimer1.callOnTimeout(timerAction);
     testTimer1.start();
     
     testTimer2.setInterval(1000);
     testTimer2.setTimeout(5000);
     testTimer2.callOnInterval(intervalAction);
-    testTimer1.callOnTimeout(timeoutAction);
+    testTimer2.callOnTimeout(timeoutAction);
     testTimer2.start();
     
     while(1);

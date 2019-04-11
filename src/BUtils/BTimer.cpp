@@ -290,14 +290,15 @@ void BTimerPrivate::eventLoop() {
             B_PRINT_DEBUG("BTimerPrivate::eventLoop interval occred. Counter value is "
             				<< m_counter << " ms")
             auto event_list_pair = m_timer_event_queue.top();
-            auto event_list = event_list_pair.second;
+            auto& event_list = event_list_pair.second;
             m_timer_event_queue.pop();
 
             m_action_mutex.lock();
             for (BTimerEventList::iterator it = event_list.begin(); it != event_list.end();) {
                 if ((*it)->timeout() < (*it)->interval()) {
-                	B_PRINT_DEBUG("BTimerPrivate::eventLoop timeout occred. Counter value is "
-            						<< m_counter << " ms")
+                	B_PRINT_DEBUG("BTimerPrivate::eventLoop timeout occred. Timer info: ["
+            						<< "ID: " << (*it)->id()
+            						<< ", Interval: " << (*it)->interval() << "]")
                     if ((*it)->timeoutAction()) {
                         m_action_queue.push((*it)->timeoutAction());
                     }
@@ -340,7 +341,6 @@ void BTimerPrivate::actionTrigger() {
         while(!m_action_queue.empty()) {
             if (m_action_mutex.try_lock()) {
                 m_action_queue.front()();
-                B_PRINT_DEBUG("BTimerPrivate::actionTrigger called an action.")
                 m_action_queue.pop();
                 m_action_mutex.unlock();
             } else {
