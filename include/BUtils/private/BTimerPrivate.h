@@ -54,8 +54,8 @@ using std::thread;
 using std::mutex;
 using std::unique_lock;
 using std::condition_variable;
-using std::atomic_int32_t;
-using std::atomic_int64_t;
+using std::atomic_int;
+using std::atomic_long;
 using std::priority_queue;
 
 class BTimerEventList: public std::list<BTimerEvent*> {
@@ -71,7 +71,7 @@ class BTimerEventList: public std::list<BTimerEvent*> {
     void setInterval(int32 _interval);
 
  private:
-    atomic_int32_t m_interval;
+    atomic_int m_interval;
 };
 
 class BTimerPriorityQueue: public priority_queue
@@ -105,9 +105,9 @@ class BTimerPrivate {
     static mutex        m_event_mutex;
     static mutex        m_action_mutex;
     static condition_variable m_action_cond;
-    static atomic_int64_t   m_counter;
-    static atomic_int32_t   m_ref_count;
-    static atomic_int32_t   m_max_id;
+    static atomic_long  m_counter;
+    static atomic_int   m_ref_count;
+    static atomic_int   m_max_id;
     static queue<std::function<void()> > m_action_queue;
     static BTimerPriorityQueue m_timer_event_queue;
     static int32 createID();

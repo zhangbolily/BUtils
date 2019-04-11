@@ -209,9 +209,9 @@ mutex           BTimerPrivate::m_event_mutex;
 mutex           BTimerPrivate::m_action_mutex;
 condition_variable BTimerPrivate::m_action_cond;
 bool            BTimerPrivate::m_is_active = false;
-atomic_int32_t  BTimerPrivate::m_max_id(0);
-atomic_int32_t  BTimerPrivate::m_ref_count(0);
-atomic_int64_t  BTimerPrivate::m_counter(0);
+atomic_int  	BTimerPrivate::m_max_id(0);
+atomic_int  	BTimerPrivate::m_ref_count(0);
+atomic_long  	BTimerPrivate::m_counter(0);
 queue<std::function<void()> > BTimerPrivate::m_action_queue;
 BTimerPriorityQueue     BTimerPrivate::m_timer_event_queue;
 

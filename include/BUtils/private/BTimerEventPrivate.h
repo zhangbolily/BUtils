@@ -42,7 +42,7 @@ namespace BUtils {
 using namespace BCore;
 using std::function;
 using std::atomic_bool;
-using std::atomic_int32_t;
+using std::atomic_int;
 using std::chrono::milliseconds;
 
 class BTimerEventPrivate {
@@ -50,8 +50,8 @@ class BTimerEventPrivate {
     explicit BTimerEventPrivate() noexcept;
     ~BTimerEventPrivate();
 
-    atomic_int32_t m_id;
-    atomic_int32_t m_counter;
+    atomic_int m_id;
+    atomic_int m_counter;
     atomic_bool m_is_active;
     atomic_bool m_is_single_shot;
     std::chrono::milliseconds m_interval;
