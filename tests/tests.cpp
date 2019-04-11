@@ -38,7 +38,15 @@
 #include "BUtils/BTimer.h"
 
 void timerAction() {
-	std::cout << "It works!" << std::endl;
+	std::cout << "Timer 1 It works!" << std::endl;
+}
+
+void timeoutAction() {
+	std::cout << "Timer 2 It works!" << std::endl;
+}
+
+void intervalAction() {
+	std::cout << "I'm Repeater. I'm Repeater." << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -77,12 +85,20 @@ int main(int argc, char** argv) {
     testTiming.stopCPUTiming();
     std::cout << "CPU Timing result is: " << testTiming.CPUTime() << " us." << std::endl;
     
-    std::cout << "Testing BTimer" << std::endl;
-    BTimer testTimer;
-    testTimer.setInterval(1000);
-    testTimer.setTimeout(5000);
-    testTimer.callOnTimeout(timerAction);
-    testTimer.start();
+    BTimer testTimer1;
+    BTimer testTimer2;
+    std::cout << "Testing BTimer, id: " << testTimer1.id() << std::endl;
+    std::cout << "Testing BTimer, id: " << testTimer2.id() << std::endl;
+    testTimer1.setInterval(1000);
+    testTimer1.setTimeout(6000);
+    testTimer1.callOnTimeout(timerAction);
+    testTimer1.start();
+    
+    testTimer2.setInterval(1000);
+    testTimer2.setTimeout(5000);
+    testTimer2.callOnInterval(intervalAction);
+    testTimer1.callOnTimeout(timeoutAction);
+    testTimer2.start();
     
     while(1);
 }

@@ -250,8 +250,8 @@ int32 BTimerPrivate::precision() {
     return m_timer_precision;
 }
 
-void BTimerPrivate::setPrecision(int32) {
-
+void BTimerPrivate::setPrecision(int32 precision) {
+	m_timer_precision = precision;
 }
 
 void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
@@ -287,29 +287,38 @@ void BTimerPrivate::eventLoop() {
 
         if (!m_timer_event_queue.empty()
             && (m_counter - m_timer_event_queue.top().first) >= 0) {
+            B_PRINT_DEBUG("BTimerPrivate::eventLoop interval occred. Counter value is "
+            				<< m_counter << " ms")
             auto event_list_pair = m_timer_event_queue.top();
             auto event_list = event_list_pair.second;
             m_timer_event_queue.pop();
 
             m_action_mutex.lock();
-            for (BTimerEventList::iterator it = event_list.begin(); it != event_list.end(); it++) {
+            for (BTimerEventList::iterator it = event_list.begin(); it != event_list.end();) {
                 if ((*it)->timeout() < (*it)->interval()) {
+                	B_PRINT_DEBUG("BTimerPrivate::eventLoop timeout occred. Counter value is "
+            						<< m_counter << " ms")
                     if ((*it)->timeoutAction()) {
                         m_action_queue.push((*it)->timeoutAction());
                     }
+                    
                     it = event_list.erase(it);
-                    //event_list.clear();
                 } else {
                     (*it)->setTimeout((*it)->timeout() - (*it)->interval());
                     if ((*it)->intervalAction()) {
                         m_action_queue.push((*it)->intervalAction());
                     }
+                    it++;
                 }
             }
+            B_PRINT_DEBUG("BTimerPrivate::eventLoop action queue has "
+    						<< m_action_queue.size() << " actions")
             m_action_mutex.unlock();
             m_action_cond.notify_one();
 
             if (!event_list.empty()) {
+            	B_PRINT_DEBUG("BTimerPrivate::eventLoop still has event in list. Event number is "
+            					<< event_list.size())
                 event_list_pair.first += event_list.front()->interval();
                 m_timer_event_queue.push(event_list_pair);
             }
@@ -336,6 +345,7 @@ void BTimerPrivate::actionTrigger() {
                 m_action_mutex.unlock();
             } else {
             	m_action_mutex.unlock();
+            	std::this_thread::sleep_for(wait_us);
             }
         }
     }
