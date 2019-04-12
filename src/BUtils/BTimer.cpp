@@ -178,6 +178,12 @@ BTimerPrivate::BTimerPrivate() noexcept
 }
 
 BTimerPrivate::~BTimerPrivate() {
+	deleteTimerEvent(m_timer_event);
+	
+	if (m_timer_event != nullptr) {
+		delete m_timer_event;
+	}	
+	
     if (m_ref_count == 1) {
         m_is_active = false;
         delete m_event_loop_thread;

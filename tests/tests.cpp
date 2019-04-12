@@ -85,11 +85,16 @@ int main(int argc, char** argv) {
     std::cout << "Testing BTiming" << std::endl;
     BTiming testTiming;
     testTiming.start();
+    std::cout << "Timing: " << testTiming.isActive() << std::endl;
     sleep(1);
+    std::cout << "Before call stop. "
+    	"Timing result is: " << testTiming.time() << " us." << std::endl;
     testTiming.stop();
     std::cout << "Timing result is: " << testTiming.time() << " us." << std::endl;
     testTiming.startCPUTiming();
     sleep(1);
+    std::cout << "Before call stop. "
+    	"CPUTiming result is: " << testTiming.CPUTime() << " us." << std::endl;
     testTiming.stopCPUTiming();
     std::cout << "CPU Timing result is: " << testTiming.CPUTime() << " us." << std::endl;
     
