@@ -39,6 +39,7 @@
 #include "BCore/BCore.h"
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
+#include "BUtils/BTiming.h"
 
 #include <algorithm>
 #include <functional>
@@ -67,14 +68,14 @@ class BTimer{
     bool isActive();
     bool isSingleShot();
     int32 id();
-    int32 interval();
-    int32 timeout();
+    uint32 interval();
+    uint32 timeout();
     void setActive(bool _active);
     void callOnInterval(std::function<void()> timer_action);
     void callOnTimeout(std::function<void()> timer_action);
-    void setInterval(int32 _interval);
+    void setInterval(uint32 _interval);
     void setInterval(std::chrono::milliseconds _interval);
-    void setTimeout(int32 _timeout);
+    void setTimeout(uint32 _timeout);
     void setTimeout(std::chrono::milliseconds _timeout);
     void setSingleShot(bool singleshot);
 

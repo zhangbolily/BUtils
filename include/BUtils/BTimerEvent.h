@@ -48,22 +48,23 @@ class BTimerEvent {
 
     bool operator>(const BTimerEvent& revent) const;
     bool operator<(const BTimerEvent& revent) const;
+    bool operator==(const BTimerEvent& revent) const;
     bool isActive() const;
     bool isSingleShot() const;
     int32 id() const;
-    int32 counter() const;
-    int32 interval() const;
-    int32 timeout() const;
+    uint32 counter() const;
+    uint32 interval() const;
+    uint32 timeout() const;
     std::function<void()> intervalAction() const;
     std::function<void()> timeoutAction() const;
     void setId(int32 _id);
     void setActive(bool _active);
     void setTimeoutAction(std::function<void()> timer_action);
     void setIntervalAction(std::function<void()> timer_action);
-    void setCounter(int32 _count);
-    void setInterval(int32 _interval);
+    void setCounter(uint32 _count);
+    void setInterval(uint32 _interval);
     void setInterval(std::chrono::milliseconds _interval);
-    void setTimeout(int32 _timeout);
+    void setTimeout(uint32 _timeout);
     void setTimeout(std::chrono::milliseconds _timeout);
     void setSingleShot(bool singleshot);
 

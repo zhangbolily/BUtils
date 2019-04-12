@@ -44,6 +44,10 @@
 #include <atomic>
 #include <mutex>
 #include <condition_variable>
+#ifdef WIN32
+#else
+#include <sys/prctl.h>
+#endif
 
 namespace BUtils {
 using namespace BCore;

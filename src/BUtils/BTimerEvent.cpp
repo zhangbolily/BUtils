@@ -51,6 +51,10 @@ bool BTimerEvent::operator<(const BTimerEvent& revent) const {
     return this->counter() < revent.counter();
 }
 
+bool BTimerEvent::operator==(const BTimerEvent& revent) const {
+    return this->id() == revent.id();
+}
+
 int32 BTimerEvent::id() const {
     return m_private_ptr->m_id;
 }
@@ -63,15 +67,15 @@ bool BTimerEvent::isSingleShot() const {
     return m_private_ptr->m_is_single_shot;
 }
 
-int32 BTimerEvent::counter() const {
+uint32 BTimerEvent::counter() const {
     return m_private_ptr->m_counter;
 }
 
-int32 BTimerEvent::interval() const {
+uint32 BTimerEvent::interval() const {
     return m_private_ptr->m_interval.count();
 }
 
-int32 BTimerEvent::timeout() const {
+uint32 BTimerEvent::timeout() const {
     return m_private_ptr->m_timeout.count();
 }
 
@@ -99,11 +103,11 @@ void BTimerEvent::setTimeoutAction(std::function<void()> timer_action) {
     m_private_ptr->m_timeout_action = timer_action;
 }
 
-void BTimerEvent::setCounter(BCore::int32 _count) {
+void BTimerEvent::setCounter(BCore::uint32 _count) {
     m_private_ptr->m_counter = _count;
 }
 
-void BTimerEvent::setInterval(int32 _interval) {
+void BTimerEvent::setInterval(uint32 _interval) {
     m_private_ptr->m_interval = std::chrono::milliseconds(_interval);
 }
 
@@ -111,7 +115,7 @@ void BTimerEvent::setInterval(std::chrono::milliseconds _interval) {
     m_private_ptr->m_interval = _interval;
 }
 
-void BTimerEvent::setTimeout(int32 _timeout) {
+void BTimerEvent::setTimeout(uint32 _timeout) {
     m_private_ptr->m_timeout = std::chrono::milliseconds(_timeout);
 }
 

@@ -65,10 +65,10 @@ int32 BTimer::id() {
     return m_private_ptr->m_timer_event->id();
 }
 
-int32 BTimer::interval() {
+uint32 BTimer::interval() {
     return m_private_ptr->m_timer_event->interval();
 }
-int32 BTimer::timeout() {
+uint32 BTimer::timeout() {
     return m_private_ptr->m_timer_event->timeout();
 }
 
@@ -96,7 +96,7 @@ void BTimer::callOnTimeout(std::function<void()> timer_action) {
     }
 }
 
-void BTimer::setInterval(int32 _interval) {
+void BTimer::setInterval(uint32 _interval) {
     if (isActive()) {
         stop();
         m_private_ptr->m_timer_event->setInterval(_interval);
@@ -116,7 +116,7 @@ void BTimer::setInterval(std::chrono::milliseconds _interval) {
     }
 }
 
-void BTimer::setTimeout(int32 _timeout) {
+void BTimer::setTimeout(uint32 _timeout) {
     if (isActive()) {
         stop();
         m_private_ptr->m_timer_event->setTimeout(_timeout);
@@ -165,7 +165,7 @@ map<int32, std::list<BTimerEvent*>> BTimerPrivate::m_timer_event_list_map;
 
 BTimerPrivate::BTimerPrivate() noexcept
     : m_timer_event(new BTimerEvent()) {
-    if (m_ref_count == 0) {
+    if (m_ref_count == 0 && !m_is_active) {
         // TODO(Ball Chang): Create a new event loop thread.
         m_is_active = true;
         m_event_loop_thread = new thread(BTimerPrivate::eventLoop);
@@ -185,11 +185,7 @@ BTimerPrivate::~BTimerPrivate() {
 	}	
 	
     if (m_ref_count == 1) {
-        m_is_active = false;
-        delete m_event_loop_thread;
-        m_event_loop_thread = nullptr;
-        delete m_action_thread;
-        m_action_thread = nullptr;
+        m_counter = 0;
     }
     m_ref_count--;
 }
@@ -208,12 +204,21 @@ void BTimerPrivate::setPrecision(int32 precision) {
 
 void BTimerPrivate::insertTimerEvent(BTimerEvent* timer_event) {
 	std::chrono::microseconds wait_us(100);
-	while(true) {
+	while(timer_event->timeout()) {
 		if (m_event_mutex.try_lock()) {
-            int32 event_list_index = timer_event->interval() + m_counter;
-            timer_event->setCounter(event_list_index);
-            m_timer_event_list_map[event_list_index]
-            .push_back(timer_event);
+		    if (timer_event->interval() < timer_event->timeout()
+		        && timer_event->interval()) {
+                int32 event_list_index = timer_event->interval() + m_counter;
+                timer_event->setCounter(event_list_index);
+                m_timer_event_list_map[event_list_index]
+                        .push_back(timer_event);
+		    } else {
+                int32 event_list_index = timer_event->timeout() + m_counter;
+                timer_event->setTimeout(0);
+                timer_event->setCounter(event_list_index);
+                m_timer_event_list_map[event_list_index]
+                        .push_back(timer_event);
+		    }
     		m_event_mutex.unlock();
     		return;
 		} else {
@@ -241,7 +246,7 @@ void BTimerPrivate::insertTimerEvent(int32 counter_index, BTimerEvent* timer_eve
 
 void BTimerPrivate::deleteTimerEvent(BTimerEvent* timer_event) {
     std::chrono::microseconds wait_us(100);
-    while (true) {
+    while (timer_event->isActive()) {
         if (m_event_mutex.try_lock()) {
             int32 event_list_index = timer_event->counter();
             auto& event_list = m_timer_event_list_map[event_list_index];
@@ -270,13 +275,20 @@ void BTimerPrivate::deleteTimerEvent(BTimerEvent* timer_event) {
 }
 
 void BTimerPrivate::eventLoop() {
+#ifdef WIN32
+#else
+    prctl(PR_SET_NAME, "eventLoop");
+#endif
+    BTiming time_correction;
+    std::chrono::microseconds sleep_us(m_timer_precision * 1000);
+    std::chrono::microseconds sleep_us_correction;
+
     while(m_is_active) {
+        time_correction.start();
         m_event_mutex.lock();
 
         if (!m_timer_event_list_map.empty()
             && (m_counter - m_timer_event_list_map.begin()->first) >= 0) {
-            B_PRINT_DEBUG("BTimerPrivate::eventLoop interval occured. Counter value is "
-            				<< m_counter << " ms")
             auto event_list_pair = m_timer_event_list_map.begin();
             auto& event_list = event_list_pair->second;
 
@@ -290,6 +302,7 @@ void BTimerPrivate::eventLoop() {
                         m_action_queue.push((*it)->timeoutAction());
                     }
                     (*it)->setTimeout(0);
+                    (*it)->setActive(false);
                 } else {
                     (*it)->setTimeout((*it)->timeout() - (*it)->interval());
                     if ((*it)->intervalAction()) {
@@ -298,7 +311,7 @@ void BTimerPrivate::eventLoop() {
                     // All of events in this list are expired.
                     // Reinsert them into event queue.
                     if ((*it)->isSingleShot()) {
-                        insertTimerEvent((*it)->timeout(), *it);
+                        insertTimerEvent((*it)->timeout() + m_counter, *it);
                         (*it)->setTimeout(0);
                     } else {
                         insertTimerEvent(*it);
@@ -319,18 +332,26 @@ void BTimerPrivate::eventLoop() {
         }
         
         m_event_mutex.unlock();
-        std::chrono::milliseconds sleep_ms(m_timer_precision);
-        std::this_thread::sleep_for(sleep_ms);
+        time_correction.stop();
+        sleep_us_correction =
+                std::chrono::microseconds(time_correction.time());
+        std::this_thread::sleep_for(sleep_us - sleep_us_correction);
         m_counter += m_timer_precision;
     }
 }
 
 void BTimerPrivate::actionTrigger() {
+#ifdef WIN32
+#else
+    prctl(PR_SET_NAME, "actionTrigger");
+#endif
+
     std::chrono::milliseconds wait_ms(100);
     std::chrono::microseconds wait_us(100);
     while(m_is_active) {
         std::unique_lock<std::mutex> lock(m_action_mutex);
         m_action_cond.wait_for(lock, wait_ms);
+        lock.unlock();
 
         while(!m_action_queue.empty()) {
             if (m_action_mutex.try_lock()) {
@@ -338,8 +359,7 @@ void BTimerPrivate::actionTrigger() {
                 m_action_queue.pop();
                 m_action_mutex.unlock();
             } else {
-            	m_action_mutex.unlock();
-            	std::this_thread::sleep_for(wait_us);
+                std::this_thread::sleep_for(wait_us);
             }
         }
     }
