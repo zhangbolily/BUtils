@@ -2,3 +2,8 @@
 	path = third_party/BCore
 	url = https://gitlab.com/zhangbolily/BCore.git
 	branch = master
+
+[submodule "third_party/googletest"]
+	path = third_party/googletest
+	url = https://github.com/google/googletest.git
+	branch = master
