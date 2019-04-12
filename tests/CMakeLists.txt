@@ -24,10 +24,12 @@ project (tests)
 
 SET (EXECUTABLE_OUTPUT_PATH ${BUtils_BINARY_DIR}/bin)
 
+include_directories ("${BUtils_BINARY_DIR}/third_party/googletest/googletest/include")
+
 aux_source_directory (. DIR_TESTS_SRCS)
 link_directories (${BUtils_BINARY_DIR})
 add_executable (${PROJECT_NAME} ${DIR_TESTS_SRCS})
-target_link_libraries (${PROJECT_NAME} butils)
+target_link_libraries (${PROJECT_NAME} butils gtest gtest_main pthread)
 if (CODE_COVERAGE)
     add_test (NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
 endif()

@@ -70,10 +70,11 @@ option (BUILD_TESTING "Build the testing tree." ON)
 # Allows this to be used by super projects with `add_subdirectory`
 if (BUILD_TESTING AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
     enable_testing()
+    # Build tests
+    add_subdirectory (tests)
+    # Build gtest for unit tests
+    add_subdirectory (${CMAKE_SOURCE_DIR}/third_party/googletest/)
 endif ()
-
-# Build tests
-add_subdirectory (tests)
 
 # Build deb package
 # Package file name prefix
