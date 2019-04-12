@@ -76,7 +76,11 @@ TEST(TestBUtils, BUtils) {
     }
 
     string fake_UUID = generateUUID4();
-    fake_UUID.replace(fake_UUID.begin(), fake_UUID.end(), '-', '_');
+    fake_UUID.replace(14, 1, 1, '5');
+    EXPECT_EQ(isUUID4(fake_UUID), false);
+    fake_UUID.replace(8, 1, 1, '_');
+    EXPECT_EQ(isUUID4(fake_UUID), false);
+    fake_UUID.replace(1, 1, 1, 'G');
     EXPECT_EQ(isUUID4(fake_UUID), false);
     fake_UUID.erase(fake_UUID.begin());
     EXPECT_EQ(isUUID4(fake_UUID), false);
