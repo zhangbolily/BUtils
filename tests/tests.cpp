@@ -30,13 +30,15 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <vector>
 #include <chrono>
-#include <unistd.h>
+#include <cstdlib>
+#include <cmath>
 
 #include "gtest/gtest.h"
 
+#include "BCore/BType.h"
 #include "BUtils/BUtils.h"
-#include "BCore/BDebug.h"
 #include "BUtils/BTiming.h"
 #include "BUtils/BTimer.h"
 
@@ -46,6 +48,21 @@ void action1() {
 
 void action2() {
 	std::cout << "I'm action 2" << std::endl;
+}
+
+BUtils::BTiming testTimerTiming1;
+BUtils::BTiming testTimerTiming2;
+
+void action3() {
+    testTimerTiming1.stop();
+    std::cout << "I'm action 3, timing result is "
+        << testTimerTiming1.time() << " us" << std::endl;
+}
+
+void action4() {
+    testTimerTiming2.stop();
+    std::cout << "I'm action 4, timing result is "
+              << testTimerTiming2.time() << " us" << std::endl;
 }
 
 class BTimingTest : public ::testing::Test {
@@ -159,4 +176,49 @@ TEST(TestBTimer, BTimer) {
     sleep(4);
     testTimer.stop();
     EXPECT_GE(testTimer.timeout(), 0);
+}
+
+TEST(BTimerBenchmark, BTimer) {
+    using namespace BCore;
+    // Accelerate the output of cout
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    std::chrono::milliseconds test_10000ms(10000);
+    std::random_device true_rand;
+    int32 timer_num = 10000;
+    int32 rand_num = 0;
+    std::vector<BUtils::BTimer*> timerVec(timer_num, nullptr);
+    for (int i=0; i < timer_num; i++) {
+        timerVec[i] = new BUtils::BTimer();
+        rand_num = true_rand();
+        rand_num = std::abs(rand_num);
+        timerVec[i]->setInterval(rand_num % 1000);
+        timerVec[i]->setTimeout(test_10000ms);
+        timerVec[i]->callOnInterval(action1);
+        timerVec[i]->callOnTimeout(action2);
+    }
+
+    testTimerTiming1.start();
+    testTimerTiming2.start();
+    timerVec[0]->callOnTimeout(action3);
+    timerVec.back()->callOnTimeout(action4);
+    for (int i=0; i < timer_num; i++) {
+        timerVec[i]->start();
+    }
+
+    sleep(15);
+
+    for (int i=0; i < timer_num; i++) {
+        timerVec[i]->stop();
+    }
+
+    for (int i=0; i < timer_num; i++) {
+        EXPECT_EQ(timerVec[i]->timeout(), 0);
+    }
+
+    for (int i=0; i < timer_num; i++) {
+        delete timerVec[i];
+    }
+    timerVec.clear();
 }
