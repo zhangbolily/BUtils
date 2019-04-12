@@ -30,7 +30,10 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <chrono>
 #include <unistd.h>
+
+#include "gtest/gtest.h"
 
 #include "BUtils/BUtils.h"
 #include "BCore/BDebug.h"
@@ -57,93 +60,107 @@ void action5() {
     std::cout << "I'm action 5" << std::endl;
 }
 
-int main(int argc, char** argv) {
-    using namespace BCore;
-    using namespace BUtils;
+class BTimingTest : public ::testing::Test {
 
+protected:
+
+    void SetUp() override {
+        std::cout << "SetUp runs before each case." << std::endl;
+    }
+
+    void TearDown() override {
+        std::cout << "TearDown runs after each case." << std::endl;
+    }
+};
+
+TEST(TestBUtils, BUtils) {
+    using namespace BUtils;
     using std::string;
     using std::set;
 
-    std::cout << "Start BUtils testing" << std::endl;
     set<string> UUID_set;
     for( int i=0; i < 10; i++) {
+        // Generated UUID must be unique and valid
         string test_UUID = generateUUID4();
-        if (!isUUID4(test_UUID)) {
-            B_PRINT_ERROR("BUtils test generateUUID4 UUID: "
-                                  << test_UUID << " is not a valid UUID.")
-        }
+        EXPECT_EQ(isUUID4(test_UUID), true);
         auto insertResult = UUID_set.insert(test_UUID);
-        if (!insertResult.second) {
-            B_PRINT_ERROR("BUtils test generateUUID4 insert UUID: "
-                          << test_UUID << " failed.")
-        }
-
-        std::cout << "generateUUID4 UUID:" << test_UUID
-                << " is a valid UUID" << std::endl;
+        EXPECT_EQ(insertResult.second, true);
     }
-    
+
     string fake_UUID = generateUUID4();
     fake_UUID.replace(fake_UUID.begin(), fake_UUID.end(), '-', '_');
-    std::cout << "UUID: " << fake_UUID << " is " << isUUID4(fake_UUID) << std::endl;
+    EXPECT_EQ(isUUID4(fake_UUID), false);
     fake_UUID.erase(fake_UUID.begin());
-    std::cout << "UUID: " << fake_UUID << " is " << isUUID4(fake_UUID) << std::endl;
+    EXPECT_EQ(isUUID4(fake_UUID), false);
+}
 
-    std::cout << "Testing BTiming" << std::endl;
-    BTiming testTiming;
+TEST(TestBTiming, BTiming) {
+    BUtils::BTiming testTiming;
     testTiming.start();
-    std::cout << "Timing: " << testTiming.isActive() << std::endl;
+    EXPECT_EQ(testTiming.isActive(), true);
+    EXPECT_EQ(testTiming.time(), 0);
     sleep(1);
-    std::cout << "Before call stop. "
-    	"Timing result is: " << testTiming.time() << " us." << std::endl;
-    testTiming.stop();
-    std::cout << "Timing result is: " << testTiming.time() << " us." << std::endl;
-    testTiming.startCPUTiming();
-    sleep(1);
-    std::cout << "Before call stop. "
-    	"CPUTiming result is: " << testTiming.CPUTime() << " us." << std::endl;
     testTiming.stopCPUTiming();
-    std::cout << "CPU Timing result is: " << testTiming.CPUTime() << " us." << std::endl;
-    
-    BTimer testTimer1;
-    BTimer testTimer2;
-    BTimer testTimer3;
-    std::cout << "Testing BTimer, id: " << testTimer1.id() << std::endl;
-    std::cout << "Testing BTimer, id: " << testTimer2.id() << std::endl;
-    testTimer1.setInterval(1000);
-    testTimer1.setTimeout(5000);
-    testTimer1.callOnTimeout(action1);
-    testTimer1.start();
-    
-    testTimer2.setInterval(1000);
-    testTimer2.setTimeout(5000);
-    testTimer2.callOnInterval(action2);
-    testTimer2.callOnTimeout(action3);
-    testTimer2.start();
+    testTiming.stop();
+    EXPECT_GE(testTiming.time(), 1000);
 
-    testTimer3.setInterval(1000);
-    testTimer3.setTimeout(5000);
-    testTimer3.start();
-    testTimer3.setInterval(1000);
-    testTimer3.setTimeout(5000);
-    testTimer3.setSingleShot(true);
-    testTimer3.callOnInterval(action4);
-    testTimer3.callOnTimeout(action5);
+    testTiming.startCPUTiming();
+    EXPECT_EQ(testTiming.isActive(), true);
+    EXPECT_EQ(testTiming.CPUTime(), 0);
+    sleep(1);
+    testTiming.stop();
+    testTiming.stopCPUTiming();
+    EXPECT_GT(testTiming.CPUTime(), 0);
+}
 
-    sleep(2);
-    std::chrono::milliseconds interval_ms(500);
-    std::chrono::milliseconds timeout_ms(10000);
-    testTimer2.setInterval(interval_ms);
-    testTimer2.setTimeout(timeout_ms);
+TEST(TestBTimer, BTimer) {
+    BUtils::BTimer testTimer;
+    std::chrono::milliseconds test_1000ms(1000);
+    std::chrono::milliseconds test_3000ms(3000);
 
-    std::cout << "Timer: " << testTimer2.id() << " timeout: "
-                << testTimer2.timeout() << std::endl;
-    std::cout << "Timer: " << testTimer2.id() << " interval: "
-              << testTimer2.interval() << std::endl;
-    std::cout << "Timer: " << testTimer2.id() << " isSingleShot: "
-              << testTimer2.isSingleShot() << std::endl;
-    sleep(3);
+    EXPECT_GE(testTimer.id(), 0);
 
-    testTimer2.stop();
-    
-    sleep(20);
+    testTimer.setInterval(1000);
+    testTimer.setTimeout(3000);
+    testTimer.setSingleShot(false);
+    EXPECT_GE(testTimer.interval(), 1000);
+    EXPECT_GE(testTimer.timeout(), 3000);
+    EXPECT_GE(testTimer.isSingleShot(), false);
+    testTimer.callOnInterval(action1);
+    testTimer.callOnTimeout(action2);
+    testTimer.start();
+    // Test set properties when running
+    testTimer.setInterval(1000);
+    testTimer.setTimeout(3000);
+    testTimer.setSingleShot(false);
+    EXPECT_GE(testTimer.interval(), 1000);
+    EXPECT_LE(testTimer.timeout(), 3000);
+    EXPECT_GE(testTimer.isSingleShot(), false);
+    testTimer.callOnInterval(action1);
+    testTimer.callOnTimeout(action2);
+    sleep(4);
+    testTimer.stop();
+    EXPECT_GE(testTimer.timeout(), 0);
+
+    testTimer.setInterval(test_1000ms);
+    testTimer.setTimeout(test_3000ms);
+    testTimer.setSingleShot(true);
+    EXPECT_GE(testTimer.interval(), 1000);
+    EXPECT_GE(testTimer.timeout(), 3000);
+    EXPECT_GE(testTimer.isSingleShot(), true);
+    testTimer.callOnInterval(action1);
+    testTimer.callOnTimeout(action2);
+    testTimer.start();
+    // Test set properties when running
+    testTimer.setInterval(test_1000ms);
+    testTimer.setTimeout(test_3000ms);
+    testTimer.setSingleShot(true);
+    EXPECT_GE(testTimer.interval(), 1000);
+    EXPECT_LE(testTimer.timeout(), 3000);
+    EXPECT_GE(testTimer.isSingleShot(), true);
+    testTimer.callOnInterval(action1);
+    testTimer.callOnTimeout(action2);
+    sleep(4);
+    testTimer.stop();
+    EXPECT_GE(testTimer.timeout(), 0);
 }

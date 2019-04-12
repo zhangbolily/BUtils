@@ -24,7 +24,7 @@ project (tests)
 
 SET (EXECUTABLE_OUTPUT_PATH ${BUtils_BINARY_DIR}/bin)
 
-include_directories ("${BUtils_BINARY_DIR}/third_party/googletest/googletest/include")
+include_directories ("${CMAKE_SOURCE_DIR}/third_party/googletest/googletest/include")
 
 aux_source_directory (. DIR_TESTS_SRCS)
 link_directories (${BUtils_BINARY_DIR})

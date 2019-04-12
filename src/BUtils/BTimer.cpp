@@ -289,6 +289,7 @@ void BTimerPrivate::eventLoop() {
                     if ((*it)->timeoutAction()) {
                         m_action_queue.push((*it)->timeoutAction());
                     }
+                    (*it)->setTimeout(0);
                 } else {
                     (*it)->setTimeout((*it)->timeout() - (*it)->interval());
                     if ((*it)->intervalAction()) {
