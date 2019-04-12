@@ -48,18 +48,6 @@ void action2() {
 	std::cout << "I'm action 2" << std::endl;
 }
 
-void action3() {
-	std::cout << "I'm action 3" << std::endl;
-}
-
-void action4() {
-    std::cout << "I'm action 4" << std::endl;
-}
-
-void action5() {
-    std::cout << "I'm action 5" << std::endl;
-}
-
 class BTimingTest : public ::testing::Test {
 
 protected:
