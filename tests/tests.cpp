@@ -93,7 +93,9 @@ TEST(TestBTiming, BTiming) {
     EXPECT_EQ(testTiming.time(), 0);
     sleep(1);
     testTiming.stopCPUTiming();
+    EXPECT_EQ(testTiming.isActive(), true);
     testTiming.stop();
+    EXPECT_EQ(testTiming.isActive(), false);
     EXPECT_GE(testTiming.time(), 1000);
 
     testTiming.startCPUTiming();
@@ -101,7 +103,9 @@ TEST(TestBTiming, BTiming) {
     EXPECT_EQ(testTiming.CPUTime(), 0);
     sleep(1);
     testTiming.stop();
+    EXPECT_EQ(testTiming.isActive(), true);
     testTiming.stopCPUTiming();
+    EXPECT_EQ(testTiming.isActive(), false);
     EXPECT_GT(testTiming.CPUTime(), 0);
 }
 
