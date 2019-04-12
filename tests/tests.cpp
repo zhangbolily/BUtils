@@ -81,6 +81,12 @@ int main(int argc, char** argv) {
         std::cout << "generateUUID4 UUID:" << test_UUID
                 << " is a valid UUID" << std::endl;
     }
+    
+    string fake_UUID = generateUUID4();
+    fake_UUID.replace(fake_UUID.begin(), fake_UUID.end(), '-', '_');
+    std::cout << "UUID: " << fake_UUID << " is " << isUUID4(fake_UUID) << std::endl;
+    fake_UUID.erase(fake_UUID.begin());
+    std::cout << "UUID: " << fake_UUID << " is " << isUUID4(fake_UUID) << std::endl;
 
     std::cout << "Testing BTiming" << std::endl;
     BTiming testTiming;
@@ -116,10 +122,12 @@ int main(int argc, char** argv) {
 
     testTimer3.setInterval(1000);
     testTimer3.setTimeout(5000);
+    testTimer3.start();
+    testTimer3.setInterval(1000);
+    testTimer3.setTimeout(5000);
     testTimer3.setSingleShot(true);
     testTimer3.callOnInterval(action4);
     testTimer3.callOnTimeout(action5);
-    testTimer3.start();
 
     sleep(2);
     std::chrono::milliseconds interval_ms(500);
