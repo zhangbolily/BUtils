@@ -158,13 +158,21 @@ void BTimer::setSingleShot(bool singleshot) {
     }
 }
 
+uint BTimer::precision() {
+    return BTimerPrivate::precision();
+}
+
+void BTimer::setPrecision(uint _precision) {
+    BTimerPrivate::setPrecision(_precision);
+}
+
 // End of BTimer implementation
 
 // Start implementation of BTimerPrivate
 
 thread*         BTimerPrivate::m_action_thread = nullptr;
 thread*         BTimerPrivate::m_event_loop_thread = nullptr;
-int32           BTimerPrivate::m_timer_precision = 1;   // Default 1ms
+uint            BTimerPrivate::m_timer_precision = 1;   // Default 1ms
 mutex           BTimerPrivate::m_event_mutex;
 mutex           BTimerPrivate::m_action_mutex;
 condition_variable BTimerPrivate::m_action_cond;
@@ -234,11 +242,11 @@ int32 BTimerPrivate::createID() {
     return m_max_id++;
 }
 
-int32 BTimerPrivate::precision() {
+uint BTimerPrivate::precision() {
     return m_timer_precision;
 }
 
-void BTimerPrivate::setPrecision(int32 precision) {
+void BTimerPrivate::setPrecision(uint precision) {
 	m_timer_precision = precision;
 }
 

@@ -83,6 +83,9 @@ class BTimer{
     void setTimeout(std::chrono::milliseconds _timeout);
     void setSingleShot(bool singleshot);
 
+    static uint precision();
+    static void setPrecision(uint);
+
  protected:
     BTimerPrivate* m_private_ptr;
 

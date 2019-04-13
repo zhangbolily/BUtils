@@ -70,7 +70,7 @@ bool isUUID4(const std::string &_uuid) {
             if (_uuid[i] != '4')
                 return false;
         } else if (_uuid[i] != '0' &&
-                    (strtol(_uuid.substr(i, 1).c_str(), nullptr, 16) > 15)) {
+                    (strtol(_uuid.substr(i, 1).c_str(), nullptr, 16) == 0)) {
             return false;
         }
     }

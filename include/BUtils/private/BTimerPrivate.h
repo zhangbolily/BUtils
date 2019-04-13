@@ -73,7 +73,7 @@ class BTimerPrivate {
 
     static thread*      m_event_loop_thread;
     static thread*      m_action_thread;
-    static int32        m_timer_precision;
+    static uint         m_timer_precision;
     static mutex        m_event_mutex;
     static mutex        m_action_mutex;
     static condition_variable m_action_cond;
@@ -86,8 +86,8 @@ class BTimerPrivate {
     static queue<std::function<void()> > m_action_queue;
     static map<int32, std::list<BTimerEvent*>> m_timer_event_list_map;
     static int32 createID();
-    static int32 precision();
-    static void setPrecision(int32);
+    static uint precision();
+    static void setPrecision(uint);
     static void insertTimerEvent(BTimerEvent* timer_event);
     static void insertTimerEvent(uint counter_index, BTimerEvent* timer_event);
     static void deleteTimerEvent(BTimerEvent* timer_event);

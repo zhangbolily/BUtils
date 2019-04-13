@@ -41,6 +41,8 @@
 #include "BUtils/BUtils.h"
 #include "BUtils/BTiming.h"
 #include "BUtils/BTimer.h"
+#include "BUtils/BTimerEvent.h"
+
 
 void action1() {
 	std::cout << "I'm action 1" << std::endl;
@@ -95,10 +97,16 @@ TEST(TestBUtils, BUtils) {
     string fake_UUID = generateUUID4();
     fake_UUID.replace(14, 1, 1, '5');
     EXPECT_EQ(isUUID4(fake_UUID), false);
+
+    fake_UUID = generateUUID4();
     fake_UUID.replace(8, 1, 1, '_');
     EXPECT_EQ(isUUID4(fake_UUID), false);
+
+    fake_UUID = generateUUID4();
     fake_UUID.replace(1, 1, 1, 'G');
     EXPECT_EQ(isUUID4(fake_UUID), false);
+
+    fake_UUID = generateUUID4();
     fake_UUID.erase(fake_UUID.begin());
     EXPECT_EQ(isUUID4(fake_UUID), false);
 }
@@ -131,14 +139,18 @@ TEST(TestBTimer, BTimer) {
     std::chrono::milliseconds test_1000ms(1000);
     std::chrono::milliseconds test_3000ms(3000);
 
-    EXPECT_GE(testTimer.id(), 0);
+    testTimer.setPrecision(2);
+    EXPECT_EQ(testTimer.precision(), 2);
+    testTimer.setPrecision(1);
+
+    EXPECT_EQ(testTimer.id(), 0);
 
     testTimer.setInterval(1000);
     testTimer.setTimeout(3000);
     testTimer.setSingleShot(false);
     EXPECT_GE(testTimer.interval(), 1000);
     EXPECT_GE(testTimer.timeout(), 3000);
-    EXPECT_GE(testTimer.isSingleShot(), false);
+    EXPECT_EQ(testTimer.isSingleShot(), false);
     testTimer.callOnInterval(action1);
     testTimer.callOnTimeout(action2);
     testTimer.start();
@@ -148,7 +160,7 @@ TEST(TestBTimer, BTimer) {
     testTimer.setSingleShot(false);
     EXPECT_GE(testTimer.interval(), 1000);
     EXPECT_LE(testTimer.timeout(), 3000);
-    EXPECT_GE(testTimer.isSingleShot(), false);
+    EXPECT_EQ(testTimer.isSingleShot(), false);
     testTimer.callOnInterval(action1);
     testTimer.callOnTimeout(action2);
     sleep(4);
@@ -160,7 +172,7 @@ TEST(TestBTimer, BTimer) {
     testTimer.setSingleShot(true);
     EXPECT_GE(testTimer.interval(), 1000);
     EXPECT_GE(testTimer.timeout(), 3000);
-    EXPECT_GE(testTimer.isSingleShot(), true);
+    EXPECT_EQ(testTimer.isSingleShot(), true);
     testTimer.callOnInterval(action1);
     testTimer.callOnTimeout(action2);
     testTimer.start();
@@ -170,12 +182,22 @@ TEST(TestBTimer, BTimer) {
     testTimer.setSingleShot(true);
     EXPECT_GE(testTimer.interval(), 1000);
     EXPECT_LE(testTimer.timeout(), 3000);
-    EXPECT_GE(testTimer.isSingleShot(), true);
+    EXPECT_EQ(testTimer.isSingleShot(), true);
     testTimer.callOnInterval(action1);
     testTimer.callOnTimeout(action2);
     sleep(4);
     testTimer.stop();
-    EXPECT_GE(testTimer.timeout(), 0);
+    EXPECT_EQ(testTimer.timeout(), 0);
+}
+
+TEST(TestBTimerEvent, BTimerEvent) {
+    BUtils::BTimerEvent timerEvent1;
+    BUtils::BTimerEvent timerEvent2;
+    timerEvent1.setCounter(10);
+    timerEvent2.setCounter(20);
+    EXPECT_EQ(timerEvent1 > timerEvent2, false);
+    EXPECT_EQ(timerEvent1 < timerEvent2, true);
+    EXPECT_EQ(timerEvent1 == timerEvent2, false);
 }
 
 TEST(BTimerBenchmark, BTimer) {
@@ -209,7 +231,7 @@ TEST(BTimerBenchmark, BTimer) {
 
     EXPECT_EQ(*timerVec[0] == *timerVec[1], false);
 
-    sleep(80);
+    sleep(60);
 
     EXPECT_EQ(*timerVec[0] > *timerVec[timer_num - 1], false);
     EXPECT_EQ(*timerVec[0] < *timerVec[timer_num - 1], true);
