@@ -47,7 +47,7 @@ $ make install
 ```
 $ cd build
 $ rm -rf ./*
-$ cmake -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ..
+$ cmake -DBUILD_TESTING=ON -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ..
 $ make tests
 $ bin/tests
 ```
