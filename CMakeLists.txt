@@ -65,7 +65,7 @@ if (CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     endif ()
 endif ()
 
-option (BUILD_TESTING "Build the testing tree." ON)
+option (BUILD_TESTING "Build the testing tree." OFF)
 # Only build tests if we are the top-level project
 # Allows this to be used by super projects with `add_subdirectory`
 if (BUILD_TESTING AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
