@@ -63,13 +63,17 @@ class BTimer{
     explicit BTimer() noexcept;
     ~BTimer();
 
+    bool operator>(const BTimer& rtimer) const;
+    bool operator<(const BTimer& rtimer) const;
+    bool operator==(const BTimer& rtimer) const;
+
     void start();
     void stop();
-    bool isActive();
-    bool isSingleShot();
-    int32 id();
-    uint32 interval();
-    uint32 timeout();
+    bool isActive() const;
+    bool isSingleShot() const;
+    int32 id() const;
+    uint32 interval() const;
+    uint32 timeout() const;
     void setActive(bool _active);
     void callOnInterval(std::function<void()> timer_action);
     void callOnTimeout(std::function<void()> timer_action);

@@ -207,7 +207,12 @@ TEST(BTimerBenchmark, BTimer) {
         timerVec[i]->start();
     }
 
-    sleep(15);
+    EXPECT_EQ(*timerVec[0] == *timerVec[1], false);
+
+    sleep(80);
+
+    EXPECT_EQ(*timerVec[0] > *timerVec[timer_num - 1], false);
+    EXPECT_EQ(*timerVec[0] < *timerVec[timer_num - 1], true);
 
     for (int i=0; i < timer_num; i++) {
         timerVec[i]->stop();

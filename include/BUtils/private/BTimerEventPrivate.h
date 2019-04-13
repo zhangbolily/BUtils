@@ -33,6 +33,7 @@
 #include <chrono>
 #include <atomic>
 #include <functional>
+#include <climits>
 
 #include "BCore/BCore.h"
 #include "BCore/BDebug.h"

@@ -52,7 +52,7 @@ bool BTimerEvent::operator<(const BTimerEvent& revent) const {
 }
 
 bool BTimerEvent::operator==(const BTimerEvent& revent) const {
-    return this->id() == revent.id();
+    return this->counter() == revent.counter();
 }
 
 int32 BTimerEvent::id() const {
@@ -131,9 +131,11 @@ void BTimerEvent::setSingleShot(bool singleshot) {
 
 // Start implementation of BTimerEventPrivate
 BTimerEventPrivate::BTimerEventPrivate() noexcept
-    : m_is_single_shot(false),
+    : m_id(0),
+      m_is_active(false),
+      m_is_single_shot(false),
       m_interval(0),
-      m_timeout(0),
+      m_timeout(UINT_MAX),
       m_counter(0),
       m_interval_action(nullptr),
       m_timeout_action(nullptr){

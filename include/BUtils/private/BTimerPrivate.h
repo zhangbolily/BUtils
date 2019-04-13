@@ -61,6 +61,7 @@ using std::mutex;
 using std::unique_lock;
 using std::condition_variable;
 using std::atomic_int;
+using std::atomic_bool;
 using std::atomic_long;
 
 class BTimerPrivate {
@@ -72,12 +73,14 @@ class BTimerPrivate {
 
     static thread*      m_event_loop_thread;
     static thread*      m_action_thread;
-    static bool         m_is_active;
     static int32        m_timer_precision;
     static mutex        m_event_mutex;
     static mutex        m_action_mutex;
     static condition_variable m_action_cond;
+    static atomic_bool  m_is_active;
     static atomic_long  m_counter;
+    static atomic_int   m_event_loop_active;
+    static atomic_int   m_action_trigger_active;
     static atomic_int   m_ref_count;
     static atomic_int   m_max_id;
     static queue<std::function<void()> > m_action_queue;
@@ -86,7 +89,7 @@ class BTimerPrivate {
     static int32 precision();
     static void setPrecision(int32);
     static void insertTimerEvent(BTimerEvent* timer_event);
-    static void insertTimerEvent(int32 counter_index, BTimerEvent* timer_event);
+    static void insertTimerEvent(uint counter_index, BTimerEvent* timer_event);
     static void deleteTimerEvent(BTimerEvent* timer_event);
     static void eventLoop();
     static void actionTrigger();
