@@ -45,7 +45,7 @@ notifications:
 
 env:
   global:
-    - CODECOV_TOKEN="ad9e77a2-75df-4293-afff-8da543c7c1a4"
+    - CODECOV_TOKEN="0ce4ef88-521d-4ea6-a645-4be9ec6d63bf"
     - OPENSSL_DIR=$(brew --prefix openssl)
     - RBXOPT=-Xcodedb.cache.enabled=no
     - LANG="en_US.UTF-8"

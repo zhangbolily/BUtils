@@ -1,19 +1,18 @@
-# BThreadPack #
-[![Build Status](https://travis-ci.com/zhangbolily/BCore.svg?branch=dev)](https://travis-ci.com/zhangbolily/BCore)
+# BUtils #
+[![Build Status](https://travis-ci.com/zhangbolily/BUtils.svg?branch=dev)](https://travis-ci.com/zhangbolily/BUtils)
 [![Language](https://img.shields.io/badge/language-C%2B%2B11-orange.svg)](https://isocpp.org/)
 [![Platforms](https://img.shields.io/badge/platform-Linux%20%7C%20Windows-green.svg)](https://gitlab.com/zhangbolily/bthreadpack)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT/)
-[![codecov](https://codecov.io/gl/zhangbolily/BCore/branch/dev/graph/badge.svg)](https://codecov.io/gl/zhangbolily/BCore)
+[![codecov](https://codecov.io/gl/zhangbolily/BUtils/branch/dev/graph/badge.svg)](https://codecov.io/gl/zhangbolily/BUtils)
 
 [English](./README.md)
 
-BThreadPack 是一个高效、任务驱动的并发编程框架。
+Ball Chang 所有项目的基础设施。
 
 ## 主要特性
-- 轻松地定义和执行任务
-- 随时可以控制线程池的运转，例如创建和退出线程
-- 用于线程间通讯的消息队列机制
-- 每个任务都是线程安全的
+- 生成基于随机数的 UUID
+- 计时器系统（精度 1 微秒）
+- 定时器系统（最小精度 1 毫秒）
 
 ## 如何开始
 
@@ -30,11 +29,12 @@ C++ 标准: c++11
 ### 安装
 
 ```
-$ git clone https://gitlab.com/zhangbolily/bthreadpack.git BThreadPack
-$ cd BThreadPack
+$ git clone https://gitlab.com/zhangbolily/BUtils.git BUtils
+$ cd BUtils
+$ git submodule update --init --recursive
 $ mkdir build
 $ cd build
-$ cmake .. 
+$ cmake ..
 $ make
 $ make install
 ```
@@ -43,20 +43,23 @@ $ make install
 
 [![Build](https://asciinema.org/a/4Sh30mIfX3uw6hboIJWFkXqbf.svg)](https://asciinema.org/a/4Sh30mIfX3uw6hboIJWFkXqbf)
 
-## 运行示例程序
-
-##### Examples
-
-此文件夹下包含了一些用于帮助你理解如何使用本工具包的示例项目。
-
-阅读 [./examples/README.md](./examples/README.md) 获取更多信息。
+## 运行测试程序
+```
+$ cd build
+$ rm -rf ./*
+$ cmake -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ..
+$ make tests
+$ bin/tests
+```
 
 ## 版本信息
 
-获取可用版本，请参阅 [tags on this repository](https://gitlab.com/zhangbolily/bthreadpack/tags)。
+获取可用版本，请参阅 [tags on this repository](https://gitlab.com/zhangbolily/BUtils/tags)。
 
 ## 路线图
-在下个版本进行性能提升。
+- 在下个版本进行性能提升
+- 更多示例程序
+- 可传递参数给定时器事件
 
 ## 作者
 
@@ -69,3 +72,4 @@ $ make install
 ## 致谢
 
 * GitLab
+* Travis-CI

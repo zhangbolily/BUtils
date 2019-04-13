@@ -63,17 +63,18 @@ if (CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     else ()
         target_link_libraries(coverage_config INTERFACE --coverage)
     endif ()
-endif (CODE_COVERAGE)
+endif ()
 
 option (BUILD_TESTING "Build the testing tree." ON)
 # Only build tests if we are the top-level project
 # Allows this to be used by super projects with `add_subdirectory`
 if (BUILD_TESTING AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
     enable_testing()
+    # Build tests
+    add_subdirectory (tests)
+    # Build gtest for unit tests
+    add_subdirectory (${CMAKE_SOURCE_DIR}/third_party/googletest/)
 endif ()
-
-# Build tests
-add_subdirectory (tests)
 
 # Build deb package
 # Package file name prefix
@@ -109,6 +110,7 @@ install (TARGETS butils DESTINATION lib)
 install (
     FILES
     "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTimer.h"
+    "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTiming.h"
     "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BUtils.h"
     DESTINATION include/${PROJECT_NAME}
 )
