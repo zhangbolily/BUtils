@@ -10,7 +10,9 @@
 Infrastructure of Ball Chang's projects.
 
 ## Main Features
-- Defining a cross-platform data types.
+- Generate UUID (Based on random value).
+- Cross-platform Timing system (Precision 1 us).
+- Cross-platform Timer system (Minimum precision 1 ms).
 
 ## Getting Started
 
@@ -28,11 +30,12 @@ Build tools: cmake make autoconf automake gcc
 ### Installation
 
 ```
-$ git clone https://gitlab.com/zhangbolily/BCore.git BCore
-$ cd BCore
+$ git clone https://gitlab.com/zhangbolily/BUtils.git BUtils
+$ cd BUtils
+$ git submodule update --init --recursive
 $ mkdir build
 $ cd build
-$ cmake .. 
+$ cmake ..
 $ make
 $ make install
 ```
@@ -42,15 +45,22 @@ $ make install
 [![Build](https://asciinema.org/a/4Sh30mIfX3uw6hboIJWFkXqbf.svg)](https://asciinema.org/a/4Sh30mIfX3uw6hboIJWFkXqbf)
 
 ## Running the tests
-
-##### Examples
+```
+$ cd build
+$ rm -rf ./*
+$ cmake -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug ..
+$ make tests
+$ bin/tests
+```
 
 ## Versioning
 
-For the versions available, see the [tags on this repository](https://gitlab.com/zhangbolily/BCore/tags).
+For the versions available, see the [tags on this repository](https://gitlab.com/zhangbolily/BUtils/tags).
 
 ## Roadmap
-Performance improvement in the next version.
+- Performance improvement in the next version.
+- More examples.
+- Pass parameter into timer action.
 
 ## Authors
 
@@ -63,3 +73,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * GitLab
+* Travis-CI
