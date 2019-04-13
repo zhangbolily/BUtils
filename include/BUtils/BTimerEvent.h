@@ -34,6 +34,7 @@
 #include "BCore/BDebug.h"
 #include "BCore/BType.h"
 
+#include <chrono>
 #include <functional>
 
 namespace BUtils {
