@@ -20,13 +20,14 @@ API
 Types
 -----
 
-.. highlight:: cpp
-    :linenothreshold: 5
-enum BTimingStatus {
-    CPUTiming,
-    Timing,
-    Stop
-};
+.. code-block:: cpp
+    :linenos:
+
+    enum BTimingStatus {
+        CPUTiming,
+        Timing,
+        Stop
+    };
 
 -------
 Methods

@@ -20,12 +20,13 @@ API
 Types
 -----
 
-.. highlight:: cpp
-    :linenothreshold: 4
-enum BTimerStatus {
-    Active,
-    Stop
-};
+.. code-block:: cpp
+    :linenos:
+
+    enum BTimerStatus {
+        Active,
+        Stop
+    };
 
 -------
 Methods
