@@ -36,38 +36,38 @@ Methods
 Reference
 ---------
 
-.. function:: BTiming() noexcept
+.. cpp:function:: BTiming() noexcept
 
 Construct a BTiming object.
 
-.. function:: ~BTiming()
+.. cpp:function:: ~BTiming()
 
 Destruct a BTiming object.
 
-.. function:: void start()
+.. cpp:function:: void start()
 
 Start recording real time. Takes no effects if startCPUTiming is called.
 
-.. function:: void stop()
+.. cpp:function:: void stop()
 
 Stop recording real time. Takes no effects if startCPUTiming is called.
 
-.. function:: void startCPUTiming()
+.. cpp:function:: void startCPUTiming()
 
 Start recording CPU time. Takes no effects if start is called.
 
-.. function:: void stopCPUTiming()
+.. cpp:function:: void stopCPUTiming()
 
 Stop recording CPU time. Takes no effects if start is called.
 
-.. function:: bool isActive()
+.. cpp:function:: bool isActive()
 
 Returns true if timing.
 
-.. function:: int64 time() const
+.. cpp:function:: int64 time() const
 
 Returns the real time recorded by calling start and stop in microseconds; otherwise returns 0.
 
-.. function:: int64 CPUTime() const
+.. cpp:function:: int64 CPUTime() const
 
 Returns the CPU time recorded by calling startCPUTiming and stopCPUTiming in microseconds; otherwise returns 0.
