@@ -13,12 +13,8 @@ Overview
 
 Class BTimer provides repetitive and single-shot timers with a minimum precision of 1 millisecond.
 
-API
-===
-
------
 Types
------
+=====
 
 .. code-block:: cpp
     :linenos:
@@ -28,14 +24,61 @@ Types
         Stop
     };
 
--------
 Methods
--------
+=======
+
+.. cpp:function:: explicit BTimer() noexcept
+
+.. cpp:function:: explicit BTimer() noexcept
+
+.. cpp:function:: explicit BTimer() noexcept
 
 
----------
+Detailed Description
+=====================
+
+Class BTimer provides repetitive and single-shot timers with a minimum precision of 1 millisecond.
+
+BTimer provides a easy to user programing interface for doing periodic jobs in your application.
+Just create a :term:`timer` and set up the properties, then start it.
+You can change the properties of a timer at any time.
+
+Example for a one second timer:
+
+.. code-block:: cpp
+    :linenos:
+
+    #include "BUtils/BTimer.h"
+    #include <unistd.h>
+    #include <iostream>
+
+    void timerAction() {
+        std::cout << "I'm timer action." << std::endl;
+    }
+
+    int main() {
+        BUtils::BTimer timer;
+        timer.callOnTimeout(timerAction);
+        timer.setTimeout(1000);
+        timer.start();
+        // If timer object is destroyed, the timer event do not exist as well.
+        // Sleep to make the timeout event occur.
+        sleep(2);
+    }
+
+BTimer's timer event system is designed to work in multi-threads environments, but BTimer object itself doesn't.
+Do not share a single BTimer object in threads, just create and use it in the same thread.
+
+------------------------------
+Accuracy and Timer Resolution
+------------------------------
+
+The accuracy of timers depends on the underlying operating system and hardware.
+Most platforms support a resolution of 1 millisecond,
+though the accuracy of the timer will not equal this resolution in many real-world situations.
+
 Reference
----------
+==========
 
 .. cpp:function:: explicit BTimer() noexcept
 

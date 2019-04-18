@@ -22,18 +22,22 @@ Infrastructure of Ball Chang's projects.
 
 .. toctree::
    :maxdepth: 2
-   :numbered: 2
    :caption: Getting Started
 
    Installation
 
 .. toctree::
    :maxdepth: 2
-   :numbered: 2
    :caption: All C++ Classes
 
    BTimer
    BTiming
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Other
+
+   Glossary
 
 
 
