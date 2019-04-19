@@ -24,15 +24,88 @@ Types
         Stop
     };
 
-Methods
-=======
+Public Functions
+=================
 
-.. cpp:function:: explicit BTimer() noexcept
+.. list-table::
+    :widths: 1 4
+    :align: left
 
-.. cpp:function:: explicit BTimer() noexcept
+    * -
+      - :cpp:func:`BTimer()`
 
-.. cpp:function:: explicit BTimer() noexcept
+    * -
+      - :cpp:func:`~BTimer()`
 
+    * - bool
+      - :cpp:func:`operator>(const BTimer& rtimer) const <operator>()>`
+
+    * - bool
+      - :cpp:func:`operator\<(const BTimer& rtimer) const <operator<()>`
+
+    * - bool
+      - :cpp:func:`operator=(const BTimer& rtimer) const <operator=()>`
+
+    * - void
+      - :cpp:func:`start()`
+
+    * - void
+      - :cpp:func:`stop()`
+
+    * - bool
+      - :cpp:func:`isActive() const <isActive()>`
+
+    * - bool
+      - :cpp:func:`isSingleShot() const <isSingleShot()>`
+
+    * - int32
+      - :cpp:func:`id() const <id()>`
+
+    * - uint32
+      - :cpp:func:`interval() const <interval()>`
+
+    * - uint32
+      - :cpp:func:`timeout() const <timeout()>`
+
+    * - void
+      - :cpp:func:`reset()`
+
+    * - void
+      - :cpp:func:`setActive(bool) <setActive()>`
+
+    * - void
+      - :cpp:func:`callOnInterval(std::function timer_action) <callOnInterval()>`
+
+    * - void
+      - :cpp:func:`callOnTimeout(std::function timer_action) <callOnTimeout()>`
+
+    * - void
+      - :cpp:func:`setInterval(uint32 _interval) <setInterval()>`
+
+    * - void
+      - :cpp:func:`setInterval(std::chrono::milliseconds _interval) <setInterval()>`
+
+    * - void
+      - :cpp:func:`setTimeout(uint32 _timeout) <setTimeout()>`
+
+    * - void
+      - :cpp:func:`setTimeout(std::chrono::milliseconds _timeout) <setTimeout()>`
+
+    * - void
+      - :cpp:func:`setSingleShot(bool singleshot) <setSingleShot()>`
+
+Static Public Functions
+========================
+
+.. list-table::
+    :widths: 1 4
+    :align: left
+
+    * - uint
+      - :cpp:func:`precision()`
+
+    * - void
+      - :cpp:func:`setPrecision(uint) <setPrecision()>`
 
 Detailed Description
 =====================
@@ -48,7 +121,7 @@ Example for a one second timer:
 .. code-block:: cpp
     :linenos:
 
-    #include "BUtils/BTimer.h"
+    #include <BUtils/BTimer>
     #include <unistd.h>
     #include <iostream>
 
@@ -128,6 +201,10 @@ Returns the timeout interval of this timer in milliseconds.
 
 Returns the timeout of this timer in milliseconds.
 
+.. cpp:function:: void reset()
+
+Reset all properties of this timer(except timer id) to default value and stop this timer.
+
 .. cpp:function:: void setActive(bool _active)
 
 Takes no effects calling by user.
@@ -141,17 +218,11 @@ Set the action that will be triggered after timeout interval.
 Set the action that will be triggered after timeout.
 
 .. cpp:function:: void setInterval(uint32 _interval)
-
-Set the timeout interval in milliseconds. Default value is 0.
-
 .. cpp:function:: void setInterval(std::chrono::milliseconds _interval)
 
 Set the timeout interval in milliseconds. Default value is 0.
 
 .. cpp:function:: void setTimeout(uint32 _timeout)
-
-Set the timeout in milliseconds. Default value is the maximum number of unsigned int.
-
 .. cpp:function:: void setTimeout(std::chrono::milliseconds _timeout)
 
 Set the timeout in milliseconds. Default value is the maximum number of unsigned int.

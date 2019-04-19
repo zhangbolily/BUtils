@@ -17,7 +17,7 @@ Welcome to BUtils's documentation!
 
 Infrastructure of Ball Chang's projects.
 
-.. Note::
+.. Warning::
     This software does not provide any guarantee.
 
 .. toctree::
