@@ -348,7 +348,8 @@ void BTimerPrivate::eventLoop() {
 
             m_action_mutex.lock();
             for (auto it = event_list.begin(); it != event_list.end();) {
-                if ((*it)->timeout() < (*it)->interval()) {
+                if ((*it)->timeout() < (*it)->interval()
+                    || (*it)->timeout() == 0) {
                 	B_PRINT_DEBUG("BTimerPrivate::eventLoop timeout occred. Timer info: ["
             						<< "ID: " << (*it)->id()
             						<< ", Interval: " << (*it)->interval()
