@@ -84,6 +84,13 @@ uint32 BTimer::timeout() const {
     return m_private_ptr->m_timer_event->timeout();
 }
 
+void BTimer::reset() {
+    if (isActive()) {
+        stop();
+    }
+    m_private_ptr->m_timer_event->reset();
+}
+
 void BTimer::setActive(bool _active) {
     m_private_ptr->m_timer_event->setActive(_active);
 }

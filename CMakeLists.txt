@@ -112,5 +112,8 @@ install (
     "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTimer.h"
     "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTiming.h"
     "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BUtils.h"
+    "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTimer"
+    "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BTiming"
+    "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/BUtils"
     DESTINATION include/${PROJECT_NAME}
 )
