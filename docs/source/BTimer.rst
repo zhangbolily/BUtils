@@ -6,7 +6,7 @@
 BTimer
 =============
 
-Defined in header "BUtils/BTimer.h"
+Defined in header <BUtils/BTimer>
 
 Overview
 ========
@@ -161,9 +161,11 @@ Do not share a single BTimer object in threads, just create and use it in the sa
 Accuracy and Timer Resolution
 ------------------------------
 
-The accuracy of timers depends on the underlying operating system and hardware.
-Most platforms support a resolution of 1 millisecond,
-though the accuracy of the timer will not equal this resolution in many real-world situations.
+The accuracy of timers depends on the underlying operating system and hardware. On most system and hardware platform,
+system clock has an accuracy of microsecond is very common.
+
+On most platforms, BTimer can support a resolution of 1 millisecond. But under heavy work load (such as many timer events)
+or high CPU usage (the timer event loop can't wake up immediately) can make the precision not so accurate.
 
 Member Type Documentation
 ==========================
