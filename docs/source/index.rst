@@ -21,20 +21,20 @@ Infrastructure of Ball Chang's projects.
     This software does not provide any guarantee.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Getting Started
 
    Installation
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: All C++ Classes
 
    BTimer
    BTiming
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Other
 
    Glossary
