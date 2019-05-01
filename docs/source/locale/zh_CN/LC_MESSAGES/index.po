@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BUtils 0.1.2-beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-01 23:59+0800\n"
+"POT-Creation-Date: 2019-05-02 00:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,10 +38,12 @@ msgid "Welcome to BUtils's documentation!"
 msgstr "欢迎来到 BUtils 的文档。"
 
 #: ../../source/index.rst:16
+#, fuzzy
 msgid ""
 "This is stable version. Need development version? `Please click here "
-"<https://bthreadpack.readthedocs.io/zh_CN/dev/>`_。"
-msgstr "这是稳定版的文档，需要最新的开发版文档？`请点击这里 "
+"<https://bthreadpack.readthedocs.io/zh_CN/dev/>`_ ."
+msgstr ""
+"这是稳定版的文档，需要最新的开发版文档？`请点击这里 "
 "<https://bthreadpack.readthedocs.io/zh_CN/dev/>`_。"
 
 #: ../../source/index.rst:18

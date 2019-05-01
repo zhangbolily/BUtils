@@ -13,7 +13,7 @@ Welcome to BUtils's documentation!
 ==================================
 
 .. Tip::
-    This is stable version. Need development version? `Please click here <https://bthreadpack.readthedocs.io/zh_CN/dev/>`_。
+    This is stable version. Need development version? `Please click here <https://bthreadpack.readthedocs.io/zh_CN/dev/>`_ .
 
 Infrastructure of Ball Chang's projects.
 
