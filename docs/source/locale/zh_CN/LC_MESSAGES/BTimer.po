@@ -31,9 +31,9 @@ msgstr "概述"
 
 #: ../../source/BTimer.rst:14 ../../source/BTimer.rst:128
 msgid ""
-"Class BTimer provides repetitive and single-shot timers with a minimum "
+"Class BTimer provides repetitive-shot and single-shot timers with a minimum "
 "precision of 1 millisecond."
-msgstr "BTimer 类提供最小精度为 1 ms 的周期性重复和单次触发的定时器。"
+msgstr "BTimer 类提供最小精度为 1 ms 的周期性重复触发和单次触发的定时器。"
 
 #: ../../source/BTimer.rst:17
 msgid "Public Types"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../../source/BTimer.rst:27
 msgid "Properties"
-msgstr ""
+msgstr "属性"
 
 #: ../../source/BTimer.rst:33 ../../source/BTimer.rst:55
 #: ../../source/BTimer.rst:58 ../../source/BTimer.rst:61
@@ -76,7 +76,7 @@ msgstr ""
 
 #: ../../source/BTimer.rst:43
 msgid "Public Functions"
-msgstr ""
+msgstr "公有函数"
 
 #: ../../source/BTimer.rst:50
 msgid ":cpp:func:`BTimer() <BTimer::BTimer()>`"
@@ -192,7 +192,7 @@ msgstr ""
 
 #: ../../source/BTimer.rst:113
 msgid "Static Public Functions"
-msgstr ""
+msgstr "静态公有函数"
 
 #: ../../source/BTimer.rst:119
 msgid "uint"
@@ -208,7 +208,7 @@ msgstr ""
 
 #: ../../source/BTimer.rst:126
 msgid "Detailed Description"
-msgstr ""
+msgstr "详细描述"
 
 #: ../../source/BTimer.rst:130
 msgid ""
@@ -216,29 +216,33 @@ msgid ""
 "jobs in your application. Just create a :term:`timer` and set up the "
 "properties, then start it. You can change the properties of a timer at "
 "any time."
-msgstr ""
+msgstr "BTimer 提供一种简单易用的编程界面，用于在您的应用中执行周期性任务。"
+"只需要创建一个 :term:`定时器` 对象，并设置相应的属性，然后启动它。"
+"你可以在任何时候改变定时器的属性值。"
 
 #: ../../source/BTimer.rst:134
 msgid "Example for a one second timer:"
-msgstr ""
+msgstr "1 秒的定时器例子："
 
 #: ../../source/BTimer.rst:157
 msgid ""
 "BTimer's timer event system is designed to work in multi-threads "
 "environments, but BTimer object itself doesn't. Do not share a single "
 "BTimer object in threads, just create and use it in the same thread."
-msgstr ""
+msgstr "BTimer 的定时器事件系统被设计为可以在多线程环境下工作，但是 BTimer 对象本身并不能做到这一点。"
+"不要尝试在线程间共享 BTimer 对象，就在一个线程中创建并使用即可。"
 
 #: ../../source/BTimer.rst:162
 msgid "Accuracy and Timer Resolution"
-msgstr ""
+msgstr "精确度和定时器精度"
 
 #: ../../source/BTimer.rst:164
 msgid ""
 "The accuracy of timers depends on the underlying operating system and "
 "hardware. On most system and hardware platform, system clock has an "
 "accuracy of microsecond is very common."
-msgstr ""
+msgstr "定时器的精确度取决于底层操作系统和硬件设备。"
+"在大多数系统平台上，系统时钟普遍可以达到 1 微秒的精确度。"
 
 #: ../../source/BTimer.rst:167
 msgid ""
@@ -246,11 +250,13 @@ msgid ""
 "under heavy work load (such as many timer events) or high CPU usage (the "
 "timer event loop can't wake up immediately) can make the precision not so"
 " accurate."
-msgstr ""
+msgstr "大多数系统平台上，BTimer 支持 1 毫秒的最低精度。"
+"但是在定时器系统工作负载非常高（例如非常多的定时器事件）或者高 CPU 使用率（这将导致定时器事件循环不能立刻被操作系统唤醒）"
+"的情况下或导致精度不准（一个定时器循环时间大于 1 毫秒）。"
 
 #: ../../source/BTimer.rst:171
 msgid "Member Type Documentation"
-msgstr ""
+msgstr "成员类型文档"
 
 #: ../../source/BTimer.rst:175
 msgid ""
@@ -258,18 +264,21 @@ msgid ""
 "<BTimer::isActive()>` and :cpp:func:`setActive(bool) "
 "<BTimer::setActive()>` ."
 msgstr ""
+"这个枚举类型被这些函数使用： :cpp:func:`isActive() const "
+"<BTimer::isActive()>` and :cpp:func:`setActive(bool) "
+"<BTimer::setActive()>` ."
 
 #: ../../source/BTimer.rst:182
 msgid "Constant"
-msgstr ""
+msgstr "常量"
 
 #: ../../source/BTimer.rst:183
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 #: ../../source/BTimer.rst:184
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: ../../source/BTimer.rst:186
 msgid "BTimer::Active"
@@ -281,7 +290,7 @@ msgstr ""
 
 #: ../../source/BTimer.rst:188
 msgid "Timer is activated."
-msgstr ""
+msgstr "定时器被激活"
 
 #: ../../source/BTimer.rst:190
 msgid "BTimer::Stop"
@@ -293,35 +302,38 @@ msgstr ""
 
 #: ../../source/BTimer.rst:192
 msgid "Timer is stop."
-msgstr ""
+msgstr "定时器停止"
 
 #: ../../source/BTimer.rst:195
 msgid "Property Documentation"
-msgstr ""
+msgstr "属性文档"
 
 #: ../../source/BTimer.rst:199
 msgid ""
 "This property holds whether the timer triggers the interval action when "
 "interval timeout occurs."
-msgstr ""
+msgstr "这个属性值表示是否要在间隔超时发生的时候触发间隔动作。"
 
 #: ../../source/BTimer.rst:201
 msgid ""
 "If true, the interval action will be triggered after every interval "
 "period unless timeout occurs. The default value is false."
-msgstr ""
+msgstr "如果为真，间隔动作会在每个间隔周期后被触发，除非定时器超时。"
+"默认值为假。"
 
 #: ../../source/BTimer.rst:205 ../../source/BTimer.rst:225
 #: ../../source/BTimer.rst:248
 msgid "Access functions:"
-msgstr ""
+msgstr "访问函数："
 
 #: ../../source/BTimer.rst:220
 msgid ""
 "This property holds the interval period of this timer. After every "
 "interval period, interval action will be triggered. The default value is "
 "0, which means no interval."
-msgstr ""
+msgstr "这个属性值表示该定时器的间隔周期。"
+"在每个间隔周期后，间隔动作会被触发。"
+"默认值是 0，代表没有间隔。"
 
 #: ../../source/BTimer.rst:235
 msgid ":cpp:func:`setInterval(std::chrono::milliseconds) <BTimer::setInterval()>`"
@@ -332,12 +344,15 @@ msgid ""
 "This property holds the expiration time of this timer. After timeout, the"
 " timer will be removed from the timer system until next start calls."
 msgstr ""
+"这个属性值表示该定时器的过期时间（超时时间）。"
+"超时之后，该定时器会从定时器系统中移除直到下一个 start 调用。"
 
 #: ../../source/BTimer.rst:244
 msgid ""
 "The default value is the maximum value of unsigned int, which means "
 "\"infinite\" for this timer."
 msgstr ""
+"默认值是最大的无符号整型，代表该定时器\"永不超时\"。"
 
 #: ../../source/BTimer.rst:258
 msgid ":cpp:func:`setTimeout(std::chrono::milliseconds) <BTimer::setTimeout()>`"
@@ -345,97 +360,98 @@ msgstr ""
 
 #: ../../source/BTimer.rst:262
 msgid "Member Function Documentation"
-msgstr ""
+msgstr "成员函数文档"
 
 #: ../../source/BTimer.rst:266
 msgid "Construct a BTimer object."
-msgstr ""
+msgstr "构造一个 BTimer 对象。"
 
 #: ../../source/BTimer.rst:270
 msgid "Destruct a BTimer object."
-msgstr ""
+msgstr "析构一个 BTimer 对象。"
 
 #: ../../source/BTimer.rst:274
 msgid "Returns true if id is greater than rtimer's id."
-msgstr ""
+msgstr "如果 id 大于 rtimer's id 则返回真。"
 
 #: ../../source/BTimer.rst:278
 msgid "Returns true if id is less than rtimer's id."
-msgstr ""
+msgstr "如果 id 小于 rtimer's id 则返回真。"
 
 #: ../../source/BTimer.rst:282
 msgid "Returns true if id is equal to rtimer's id."
-msgstr ""
+msgstr "如果 id 等于 rtimer's id 则返回真。"
 
 #: ../../source/BTimer.rst:286
 msgid "Start this timer; takes no effects if timeout is 0."
-msgstr ""
+msgstr "开启该定时器；如果超时时间设置为 0 则该函数不做任何事情。"
 
 #: ../../source/BTimer.rst:290
 msgid ""
 "Stop this timer; takes no effects if this timer is expired(timeout "
 "occurs)."
-msgstr ""
+msgstr "停止该定时器；如果定时器已经过期则该函数不做任何事情。"
 
 #: ../../source/BTimer.rst:294
 msgid "Returns true if this timer is running."
-msgstr ""
+msgstr "如果定时器正在运行则返回真。"
 
 #: ../../source/BTimer.rst:298
 msgid "Returns true if interval action is only triggered once."
-msgstr ""
+msgstr "如果间隔事件只触发一次则返回真。"
 
 #: ../../source/BTimer.rst:302
 msgid "Returns the id of this timer."
-msgstr ""
+msgstr "返回定时器的 id。"
 
 #: ../../source/BTimer.rst:306
 msgid "Returns the timeout interval of this timer in milliseconds."
-msgstr ""
+msgstr "返回定时器超时间隔周期，以毫秒为单位。"
 
 #: ../../source/BTimer.rst:310
 msgid "Returns the timeout of this timer in milliseconds."
-msgstr ""
+msgstr "返回定时器超时时间，以毫秒为单位。"
 
 #: ../../source/BTimer.rst:314
 msgid ""
 "Reset all properties of this timer(except timer id) to default value and "
 "stop this timer."
-msgstr ""
+msgstr "重置该定时器的所有属性值（除了定时器 id）为默认值并停止该定时器。"
 
 #: ../../source/BTimer.rst:318
 msgid "Takes no effects calling by user."
-msgstr ""
+msgstr "用户调用则该函数不做任何事情。"
 
 #: ../../source/BTimer.rst:322
 msgid "Set the action that will be triggered after timeout interval."
-msgstr ""
+msgstr "设置超时间隔之后要触发的动作。"
 
 #: ../../source/BTimer.rst:326
 msgid "Set the action that will be triggered after timeout."
-msgstr ""
+msgstr "设置超时之后要触发的动作。"
 
 #: ../../source/BTimer.rst:331
 msgid "Set the timeout interval in milliseconds. Default value is 0."
-msgstr ""
+msgstr "设置超时间隔，以毫秒为单位。默认值是 0。"
 
 #: ../../source/BTimer.rst:336
 msgid ""
 "Set the timeout in milliseconds. Default value is the maximum number of "
 "unsigned int."
-msgstr ""
+msgstr "设置超时时间，以毫秒为单位。默认值是最大的无符号整型。"
 
 #: ../../source/BTimer.rst:340
 msgid "The interval action will be triggered only once if singleshot is true."
-msgstr ""
+msgstr "如果 singleshot 为真，则间隔动作只会被触发一次。"
 
 #: ../../source/BTimer.rst:344
 msgid ""
 "Returns the precision of timer in milliseconds. Default value is 1 "
 "millisecond."
 msgstr ""
+"返回定时器的精度，以毫秒为单位。默认值是 1 毫秒。"
 
 #: ../../source/BTimer.rst:348
 msgid "Set the timer precision in milliseconds."
-msgstr ""
+msgstr "设置定时器的精度，以毫秒为单位。"
 
