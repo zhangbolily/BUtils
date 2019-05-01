@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Ball Chang
+# This file is distributed under the same license as the BUtils package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BUtils 0.1.2-beta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-01 23:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../../source/BTiming.rst:7
+msgid "BTiming"
+msgstr ""
+
+#: ../../source/BTiming.rst:9
+msgid "Defined in header <BUtils/BTiming>"
+msgstr ""
+
+#: ../../source/BTiming.rst:12
+msgid "Overview"
+msgstr ""
+
+#: ../../source/BTiming.rst:14 ../../source/BTiming.rst:63
+msgid ""
+"Class BTiming provides a timing system to record time with a minimum "
+"precision of 1 microsecond."
+msgstr ""
+
+#: ../../source/BTiming.rst:17
+msgid "Public Types"
+msgstr ""
+
+#: ../../source/BTiming.rst:23
+msgid "enum"
+msgstr ""
+
+#: ../../source/BTiming.rst:24
+msgid ":cpp:enum:`BTimingStatus {CPUTiming, Timing, Stop} <BTimingStatus>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:27
+msgid "Public Functions"
+msgstr ""
+
+#: ../../source/BTiming.rst:34
+msgid ":cpp:func:`BTiming() noexcept <BTiming::BTiming()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:37
+msgid ":cpp:func:`~BTiming() <BTiming::~BTiming()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:39 ../../source/BTiming.rst:42
+#: ../../source/BTiming.rst:45 ../../source/BTiming.rst:48
+msgid "void"
+msgstr ""
+
+#: ../../source/BTiming.rst:40
+msgid ":cpp:func:`start() <BTiming::start()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:43
+msgid ":cpp:func:`stop() <BTiming::stop()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:46
+msgid ":cpp:func:`startCPUTiming() <BTiming::startCPUTiming()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:49
+msgid ":cpp:func:`stopCPUTiming() <BTiming::stopCPUTiming()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:51
+msgid "bool"
+msgstr ""
+
+#: ../../source/BTiming.rst:52
+msgid ":cpp:func:`isActive() <BTiming::isActive()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:54 ../../source/BTiming.rst:57
+msgid "int64"
+msgstr ""
+
+#: ../../source/BTiming.rst:55
+msgid ":cpp:func:`time() const <BTiming::time()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:58
+msgid ":cpp:func:`CPUTime() const <BTiming::CPUTime()>`"
+msgstr ""
+
+#: ../../source/BTiming.rst:61
+msgid "Detailed Description"
+msgstr ""
+
+#: ../../source/BTiming.rst:65
+msgid ""
+"BTiming can record both :term:`real time` and :term:`CPU time` with the "
+"same minimum precision of 1 microsecond."
+msgstr ""
+
+#: ../../source/BTiming.rst:67
+msgid "Example for timing one second:"
+msgstr ""
+
+#: ../../source/BTiming.rst:91
+msgid "Member Type Documentation"
+msgstr ""
+
+#: ../../source/BTiming.rst:100
+msgid "Constant"
+msgstr ""
+
+#: ../../source/BTiming.rst:101
+msgid "Value"
+msgstr ""
+
+#: ../../source/BTiming.rst:102
+msgid "Description"
+msgstr ""
+
+#: ../../source/BTiming.rst:104
+msgid "BTiming::CPUTiming"
+msgstr ""
+
+#: ../../source/BTiming.rst:105
+msgid "0"
+msgstr ""
+
+#: ../../source/BTiming.rst:106
+msgid "Represents recording CPU time."
+msgstr ""
+
+#: ../../source/BTiming.rst:108
+msgid "BTiming::Timing"
+msgstr ""
+
+#: ../../source/BTiming.rst:109
+msgid "1"
+msgstr ""
+
+#: ../../source/BTiming.rst:110
+msgid "Represents recording real time."
+msgstr ""
+
+#: ../../source/BTiming.rst:112
+msgid "BTiming::Stop"
+msgstr ""
+
+#: ../../source/BTiming.rst:113
+msgid "2"
+msgstr ""
+
+#: ../../source/BTiming.rst:114
+msgid "Stopped recording."
+msgstr ""
+
+#: ../../source/BTiming.rst:118
+msgid "Member Function Documentation"
+msgstr ""
+
+#: ../../source/BTiming.rst:122
+msgid "Construct a BTiming object."
+msgstr ""
+
+#: ../../source/BTiming.rst:126
+msgid "Destruct a BTiming object."
+msgstr ""
+
+#: ../../source/BTiming.rst:130
+msgid "Start recording real time. Takes no effects if startCPUTiming is called."
+msgstr ""
+
+#: ../../source/BTiming.rst:134
+msgid "Stop recording real time. Takes no effects if startCPUTiming is called."
+msgstr ""
+
+#: ../../source/BTiming.rst:138
+msgid "Start recording CPU time. Takes no effects if start is called."
+msgstr ""
+
+#: ../../source/BTiming.rst:142
+msgid "Stop recording CPU time. Takes no effects if start is called."
+msgstr ""
+
+#: ../../source/BTiming.rst:146
+msgid "Returns true if timing."
+msgstr ""
+
+#: ../../source/BTiming.rst:150
+msgid ""
+"Returns the real time recorded by calling start and stop in microseconds;"
+" otherwise returns 0."
+msgstr ""
+
+#: ../../source/BTiming.rst:154
+msgid ""
+"Returns the CPU time recorded by calling startCPUTiming and stopCPUTiming"
+" in microseconds; otherwise returns 0."
+msgstr ""
+

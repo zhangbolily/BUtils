@@ -1,0 +1,441 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Ball Chang
+# This file is distributed under the same license as the BUtils package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BUtils 0.1.2-beta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-01 23:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../../source/BTimer.rst:7
+msgid "BTimer"
+msgstr "BTimer"
+
+#: ../../source/BTimer.rst:9
+msgid "Defined in header <BUtils/BTimer>"
+msgstr "定义在头文件 <BUtils/BTimer> 中"
+
+#: ../../source/BTimer.rst:12
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/BTimer.rst:14 ../../source/BTimer.rst:128
+msgid ""
+"Class BTimer provides repetitive and single-shot timers with a minimum "
+"precision of 1 millisecond."
+msgstr "BTimer 类提供最小精度为 1 ms 的周期性重复和单次触发的定时器。"
+
+#: ../../source/BTimer.rst:17
+msgid "Public Types"
+msgstr "公有类型"
+
+#: ../../source/BTimer.rst:23
+msgid "enum"
+msgstr ""
+
+#: ../../source/BTimer.rst:24
+msgid ":cpp:enum:`BTimerStatus {Active, Stop} <BTimerStatus>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:27
+msgid "Properties"
+msgstr ""
+
+#: ../../source/BTimer.rst:33 ../../source/BTimer.rst:55
+#: ../../source/BTimer.rst:58 ../../source/BTimer.rst:61
+#: ../../source/BTimer.rst:70 ../../source/BTimer.rst:73
+#: ../../source/BTimer.rst:211
+msgid "bool"
+msgstr ""
+
+#: ../../source/BTimer.rst:34
+msgid ":cpp:member:`singleShot`"
+msgstr ""
+
+#: ../../source/BTimer.rst:36 ../../source/BTimer.rst:39
+msgid "std::chrono::milliseconds"
+msgstr ""
+
+#: ../../source/BTimer.rst:37
+msgid ":cpp:member:`interval`"
+msgstr ""
+
+#: ../../source/BTimer.rst:40
+msgid ":cpp:member:`timeout`"
+msgstr ""
+
+#: ../../source/BTimer.rst:43
+msgid "Public Functions"
+msgstr ""
+
+#: ../../source/BTimer.rst:50
+msgid ":cpp:func:`BTimer() <BTimer::BTimer()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:53
+msgid ":cpp:func:`~BTimer() <BTimer::~BTimer()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:56
+msgid ":cpp:func:`operator>(const BTimer& rtimer) const <BTimer::operator>()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:59
+msgid ":cpp:func:`operator\\<(const BTimer& rtimer) const <BTimer::operator<()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:62
+msgid ":cpp:func:`operator=(const BTimer& rtimer) const <BTimer::operator=()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:64 ../../source/BTimer.rst:67
+#: ../../source/BTimer.rst:85 ../../source/BTimer.rst:88
+#: ../../source/BTimer.rst:91 ../../source/BTimer.rst:94
+#: ../../source/BTimer.rst:97 ../../source/BTimer.rst:100
+#: ../../source/BTimer.rst:103 ../../source/BTimer.rst:106
+#: ../../source/BTimer.rst:109 ../../source/BTimer.rst:122
+#: ../../source/BTimer.rst:214 ../../source/BTimer.rst:234
+#: ../../source/BTimer.rst:257
+msgid "void"
+msgstr ""
+
+#: ../../source/BTimer.rst:65
+msgid ":cpp:func:`start() <BTimer::start()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:68
+msgid ":cpp:func:`stop() <BTimer::stop()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:71
+msgid ":cpp:func:`isActive() const <BTimer::isActive()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:74 ../../source/BTimer.rst:212
+msgid ":cpp:func:`isSingleShot() const <BTimer::isSingleShot()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:76
+msgid "int32"
+msgstr ""
+
+#: ../../source/BTimer.rst:77
+msgid ":cpp:func:`id() const <BTimer::id()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:79 ../../source/BTimer.rst:82
+#: ../../source/BTimer.rst:231 ../../source/BTimer.rst:254
+msgid "uint32"
+msgstr ""
+
+#: ../../source/BTimer.rst:80 ../../source/BTimer.rst:232
+msgid ":cpp:func:`interval() const <BTimer::interval()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:83 ../../source/BTimer.rst:255
+msgid ":cpp:func:`timeout() const <BTimer::timeout()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:86
+msgid ":cpp:func:`reset() <BTimer::reset()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:89
+msgid ":cpp:func:`setActive(bool) <BTimer::setActive()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:92
+msgid ""
+":cpp:func:`callOnInterval(std::function timer_action) "
+"<BTimer::callOnInterval()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:95
+msgid ""
+":cpp:func:`callOnTimeout(std::function timer_action) "
+"<BTimer::callOnTimeout()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:98
+msgid ":cpp:func:`setInterval(uint32 _interval) <BTimer::setInterval()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:101
+msgid ""
+":cpp:func:`setInterval(std::chrono::milliseconds _interval) "
+"<BTimer::setInterval()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:104
+msgid ":cpp:func:`setTimeout(uint32 _timeout) <BTimer::setTimeout()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:107
+msgid ""
+":cpp:func:`setTimeout(std::chrono::milliseconds _timeout) "
+"<BTimer::setTimeout()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:110 ../../source/BTimer.rst:215
+msgid ":cpp:func:`setSingleShot(bool singleshot) <BTimer::setSingleShot()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:113
+msgid "Static Public Functions"
+msgstr ""
+
+#: ../../source/BTimer.rst:119
+msgid "uint"
+msgstr ""
+
+#: ../../source/BTimer.rst:120
+msgid ":cpp:func:`precision()`"
+msgstr ""
+
+#: ../../source/BTimer.rst:123
+msgid ":cpp:func:`setPrecision(uint) <setPrecision()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:126
+msgid "Detailed Description"
+msgstr ""
+
+#: ../../source/BTimer.rst:130
+msgid ""
+"BTimer provides a easy to user programing interface for doing periodic "
+"jobs in your application. Just create a :term:`timer` and set up the "
+"properties, then start it. You can change the properties of a timer at "
+"any time."
+msgstr ""
+
+#: ../../source/BTimer.rst:134
+msgid "Example for a one second timer:"
+msgstr ""
+
+#: ../../source/BTimer.rst:157
+msgid ""
+"BTimer's timer event system is designed to work in multi-threads "
+"environments, but BTimer object itself doesn't. Do not share a single "
+"BTimer object in threads, just create and use it in the same thread."
+msgstr ""
+
+#: ../../source/BTimer.rst:162
+msgid "Accuracy and Timer Resolution"
+msgstr ""
+
+#: ../../source/BTimer.rst:164
+msgid ""
+"The accuracy of timers depends on the underlying operating system and "
+"hardware. On most system and hardware platform, system clock has an "
+"accuracy of microsecond is very common."
+msgstr ""
+
+#: ../../source/BTimer.rst:167
+msgid ""
+"On most platforms, BTimer can support a resolution of 1 millisecond. But "
+"under heavy work load (such as many timer events) or high CPU usage (the "
+"timer event loop can't wake up immediately) can make the precision not so"
+" accurate."
+msgstr ""
+
+#: ../../source/BTimer.rst:171
+msgid "Member Type Documentation"
+msgstr ""
+
+#: ../../source/BTimer.rst:175
+msgid ""
+"This enum type is used when calling :cpp:func:`isActive() const "
+"<BTimer::isActive()>` and :cpp:func:`setActive(bool) "
+"<BTimer::setActive()>` ."
+msgstr ""
+
+#: ../../source/BTimer.rst:182
+msgid "Constant"
+msgstr ""
+
+#: ../../source/BTimer.rst:183
+msgid "Value"
+msgstr ""
+
+#: ../../source/BTimer.rst:184
+msgid "Description"
+msgstr ""
+
+#: ../../source/BTimer.rst:186
+msgid "BTimer::Active"
+msgstr ""
+
+#: ../../source/BTimer.rst:187
+msgid "0"
+msgstr ""
+
+#: ../../source/BTimer.rst:188
+msgid "Timer is activated."
+msgstr ""
+
+#: ../../source/BTimer.rst:190
+msgid "BTimer::Stop"
+msgstr ""
+
+#: ../../source/BTimer.rst:191
+msgid "1"
+msgstr ""
+
+#: ../../source/BTimer.rst:192
+msgid "Timer is stop."
+msgstr ""
+
+#: ../../source/BTimer.rst:195
+msgid "Property Documentation"
+msgstr ""
+
+#: ../../source/BTimer.rst:199
+msgid ""
+"This property holds whether the timer triggers the interval action when "
+"interval timeout occurs."
+msgstr ""
+
+#: ../../source/BTimer.rst:201
+msgid ""
+"If true, the interval action will be triggered after every interval "
+"period unless timeout occurs. The default value is false."
+msgstr ""
+
+#: ../../source/BTimer.rst:205 ../../source/BTimer.rst:225
+#: ../../source/BTimer.rst:248
+msgid "Access functions:"
+msgstr ""
+
+#: ../../source/BTimer.rst:220
+msgid ""
+"This property holds the interval period of this timer. After every "
+"interval period, interval action will be triggered. The default value is "
+"0, which means no interval."
+msgstr ""
+
+#: ../../source/BTimer.rst:235
+msgid ":cpp:func:`setInterval(std::chrono::milliseconds) <BTimer::setInterval()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:240
+msgid ""
+"This property holds the expiration time of this timer. After timeout, the"
+" timer will be removed from the timer system until next start calls."
+msgstr ""
+
+#: ../../source/BTimer.rst:244
+msgid ""
+"The default value is the maximum value of unsigned int, which means "
+"\"infinite\" for this timer."
+msgstr ""
+
+#: ../../source/BTimer.rst:258
+msgid ":cpp:func:`setTimeout(std::chrono::milliseconds) <BTimer::setTimeout()>`"
+msgstr ""
+
+#: ../../source/BTimer.rst:262
+msgid "Member Function Documentation"
+msgstr ""
+
+#: ../../source/BTimer.rst:266
+msgid "Construct a BTimer object."
+msgstr ""
+
+#: ../../source/BTimer.rst:270
+msgid "Destruct a BTimer object."
+msgstr ""
+
+#: ../../source/BTimer.rst:274
+msgid "Returns true if id is greater than rtimer's id."
+msgstr ""
+
+#: ../../source/BTimer.rst:278
+msgid "Returns true if id is less than rtimer's id."
+msgstr ""
+
+#: ../../source/BTimer.rst:282
+msgid "Returns true if id is equal to rtimer's id."
+msgstr ""
+
+#: ../../source/BTimer.rst:286
+msgid "Start this timer; takes no effects if timeout is 0."
+msgstr ""
+
+#: ../../source/BTimer.rst:290
+msgid ""
+"Stop this timer; takes no effects if this timer is expired(timeout "
+"occurs)."
+msgstr ""
+
+#: ../../source/BTimer.rst:294
+msgid "Returns true if this timer is running."
+msgstr ""
+
+#: ../../source/BTimer.rst:298
+msgid "Returns true if interval action is only triggered once."
+msgstr ""
+
+#: ../../source/BTimer.rst:302
+msgid "Returns the id of this timer."
+msgstr ""
+
+#: ../../source/BTimer.rst:306
+msgid "Returns the timeout interval of this timer in milliseconds."
+msgstr ""
+
+#: ../../source/BTimer.rst:310
+msgid "Returns the timeout of this timer in milliseconds."
+msgstr ""
+
+#: ../../source/BTimer.rst:314
+msgid ""
+"Reset all properties of this timer(except timer id) to default value and "
+"stop this timer."
+msgstr ""
+
+#: ../../source/BTimer.rst:318
+msgid "Takes no effects calling by user."
+msgstr ""
+
+#: ../../source/BTimer.rst:322
+msgid "Set the action that will be triggered after timeout interval."
+msgstr ""
+
+#: ../../source/BTimer.rst:326
+msgid "Set the action that will be triggered after timeout."
+msgstr ""
+
+#: ../../source/BTimer.rst:331
+msgid "Set the timeout interval in milliseconds. Default value is 0."
+msgstr ""
+
+#: ../../source/BTimer.rst:336
+msgid ""
+"Set the timeout in milliseconds. Default value is the maximum number of "
+"unsigned int."
+msgstr ""
+
+#: ../../source/BTimer.rst:340
+msgid "The interval action will be triggered only once if singleshot is true."
+msgstr ""
+
+#: ../../source/BTimer.rst:344
+msgid ""
+"Returns the precision of timer in milliseconds. Default value is 1 "
+"millisecond."
+msgstr ""
+
+#: ../../source/BTimer.rst:348
+msgid "Set the timer precision in milliseconds."
+msgstr ""
+
