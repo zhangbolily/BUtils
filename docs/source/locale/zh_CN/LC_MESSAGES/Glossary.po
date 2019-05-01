@@ -49,11 +49,11 @@ msgstr ""
 
 #: ../../source/Glossary.rst:20
 msgid "Timer"
-msgstr ""
+msgstr "定时器"
 
 #: ../../source/Glossary.rst:22
 msgid ""
 "A special clock that can trigger event according to specified "
 "configuration."
-msgstr ""
+msgstr "一种可以根据特定配置来触发事件的特殊时钟。"
 
