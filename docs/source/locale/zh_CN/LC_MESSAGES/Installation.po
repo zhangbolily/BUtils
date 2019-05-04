@@ -19,33 +19,33 @@ msgstr ""
 
 #: ../../source/Installation.rst:7 ../../source/Installation.rst:34
 msgid "Installation"
-msgstr ""
+msgstr "安装"
 
 #: ../../source/Installation.rst:10
 msgid "Quick start video"
-msgstr ""
+msgstr "快速上手视频"
 
 #: ../../source/Installation.rst:12
 msgid ""
 "The video below shows you how to build and launch a quick test with "
 "BUtils."
-msgstr ""
+msgstr "下面的视频演示了如何构建和快速测试 BUtils。"
 
 #: ../../source/Installation.rst:19
 msgid "Quick start"
-msgstr ""
+msgstr "快速开始"
 
 #: ../../source/Installation.rst:21
 msgid ""
 "These instructions will get you a copy of the project up and running on "
 "your local machine for development and testing purposes."
-msgstr ""
+msgstr "通过以下指令可以获得一个本项目的副本并且可以在你的本地计算机上运行，用于开发和测试。"
 
 #: ../../source/Installation.rst:25
 msgid "Prerequisites"
-msgstr ""
+msgstr "前置要求"
 
 #: ../../source/Installation.rst:49
 msgid "Running the tests"
-msgstr ""
+msgstr "运行测试"
 

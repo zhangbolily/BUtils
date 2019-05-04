@@ -19,33 +19,35 @@ msgstr ""
 
 #: ../../source/Glossary.rst:7
 msgid "Glossary"
-msgstr ""
+msgstr "术语表"
 
 #: ../../source/Glossary.rst:10
 msgid "Real time"
-msgstr ""
+msgstr "真实时间"
 
 #: ../../source/Glossary.rst:12
 msgid "Represent the time spent in our real world. Such as 24h, 1 day."
 msgstr ""
+"代表真实世界的时间，例如 24 小时或 1 天。"
 
 #: ../../source/Glossary.rst:13
 msgid "CPU time"
-msgstr ""
+msgstr "CPU 时间"
 
 #: ../../source/Glossary.rst:15
 msgid ""
 "The time that operating system allocated to for computing. This time can "
 "be greater(in multi-thread program), equal or less than real time."
 msgstr ""
+"操作系统分配的用于计算的时间。这个时间可以大于（在多线程程序中）、等于或小于真实时间。"
 
 #: ../../source/Glossary.rst:17
 msgid "Timing"
-msgstr ""
+msgstr "计时"
 
 #: ../../source/Glossary.rst:19
 msgid "Recording time."
-msgstr ""
+msgstr "记录时间。"
 
 #: ../../source/Glossary.rst:20
 msgid "Timer"

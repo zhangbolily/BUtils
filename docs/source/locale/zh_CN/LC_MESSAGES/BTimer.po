@@ -33,7 +33,9 @@ msgstr "概述"
 msgid ""
 "Class BTimer provides repetitive-shot and single-shot timers with a minimum "
 "precision of 1 millisecond."
-msgstr "BTimer 类提供最小精度为 1 ms 的周期性重复触发和单次触发的定时器。"
+msgstr ""
+"BTimer 类提供最小精度为 1 ms 的周期性"
+"重复触发和单次触发的定时器。"
 
 #: ../../source/BTimer.rst:17
 msgid "Public Types"
