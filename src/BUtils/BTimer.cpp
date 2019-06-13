@@ -84,6 +84,13 @@ uint32 BTimer::timeout() const {
     return m_private_ptr->m_timer_event->timeout();
 }
 
+void BTimer::reset() {
+    if (isActive()) {
+        stop();
+    }
+    m_private_ptr->m_timer_event->reset();
+}
+
 void BTimer::setActive(bool _active) {
     m_private_ptr->m_timer_event->setActive(_active);
 }
@@ -348,7 +355,8 @@ void BTimerPrivate::eventLoop() {
 
             m_action_mutex.lock();
             for (auto it = event_list.begin(); it != event_list.end();) {
-                if ((*it)->timeout() < (*it)->interval()) {
+                if ((*it)->timeout() < (*it)->interval()
+                    || (*it)->timeout() == 0) {
                 	B_PRINT_DEBUG("BTimerPrivate::eventLoop timeout occred. Timer info: ["
             						<< "ID: " << (*it)->id()
             						<< ", Interval: " << (*it)->interval()

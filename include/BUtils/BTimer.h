@@ -74,6 +74,7 @@ class BTimer{
     int32 id() const;
     uint32 interval() const;
     uint32 timeout() const;
+    void reset();
     void setActive(bool _active);
     void callOnInterval(std::function<void()> timer_action);
     void callOnTimeout(std::function<void()> timer_action);

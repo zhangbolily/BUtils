@@ -58,6 +58,7 @@ class BTimerEvent {
     uint32 timeout() const;
     std::function<void()> intervalAction() const;
     std::function<void()> timeoutAction() const;
+    void reset();
     void setId(int32 _id);
     void setActive(bool _active);
     void setTimeoutAction(std::function<void()> timer_action);

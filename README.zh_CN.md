@@ -5,9 +5,11 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT/)
 [![codecov](https://codecov.io/gl/zhangbolily/BUtils/branch/dev/graph/badge.svg)](https://codecov.io/gl/zhangbolily/BUtils)
 
-[English](./README.md)
+[English Readme](./README.md)
 
 Ball Chang 所有项目的基础设施。
+
+更详细的文档在 https://butils.readthedocs.io/zh_CN/latest/
 
 ## 主要特性
 - 生成基于随机数的 UUID

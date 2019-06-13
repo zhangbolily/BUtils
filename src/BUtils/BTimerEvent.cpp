@@ -87,6 +87,17 @@ std::function<void()> BTimerEvent::timeoutAction() const {
     return m_private_ptr->m_timeout_action;
 }
 
+void BTimerEvent::reset() {
+    // Won't reset timer id.
+    m_private_ptr->m_is_active = false;
+    m_private_ptr->m_is_single_shot = false;
+    m_private_ptr->m_interval = std::chrono::milliseconds(0);
+    m_private_ptr->m_timeout = std::chrono::milliseconds(UINT_MAX);
+    m_private_ptr->m_counter = 0;
+    m_private_ptr->m_interval_action = nullptr;
+    m_private_ptr->m_timeout_action = nullptr;
+}
+
 void BTimerEvent::setId(BCore::int32 _id) {
     m_private_ptr->m_id = _id;
 }

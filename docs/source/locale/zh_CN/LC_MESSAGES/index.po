@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Ball Chang
+# This file is distributed under the same license as the BUtils package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BUtils 0.1.2-beta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-02 00:19+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: ../../source/index.rst:23
+msgid "Getting Started"
+msgstr "开始"
+
+#: ../../source/index.rst:29
+msgid "All C++ Classes"
+msgstr "全部的 C++ 类"
+
+#: ../../source/index.rst:36
+msgid "Other"
+msgstr "其他"
+
+#: ../../source/index.rst:10
+msgid "BUtils"
+msgstr ""
+
+#: ../../source/index.rst:13
+msgid "Welcome to BUtils's documentation!"
+msgstr "欢迎来到 BUtils 的文档。"
+
+#: ../../source/index.rst:16
+#, fuzzy
+msgid ""
+"This is stable version. Need development version? `Please click here "
+"<https://bthreadpack.readthedocs.io/zh_CN/dev/>`_ ."
+msgstr ""
+"这是稳定版的文档，需要最新的开发版文档？`请点击这里 "
+"<https://bthreadpack.readthedocs.io/zh_CN/dev/>`_。"
+
+#: ../../source/index.rst:18
+msgid "Infrastructure of Ball Chang's projects."
+msgstr "Ball Chang 项目之基石。"
+
+#: ../../source/index.rst:21
+msgid "This software does not provide any guarantee."
+msgstr "本软件不提供任何担保。"
+
+#: ../../source/index.rst:45
+msgid "Indices and tables"
+msgstr "索引"
+
+#: ../../source/index.rst:47
+msgid ":ref:`genindex`"
+msgstr ""
+
+#: ../../source/index.rst:48
+msgid ":ref:`modindex`"
+msgstr ""
+
+#: ../../source/index.rst:49
+msgid ":ref:`search`"
+msgstr ""
+

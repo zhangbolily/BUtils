@@ -3,26 +3,42 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _index_rst:
+
+=======
+BUtils
+=======
+
 Welcome to BUtils's documentation!
 ==================================
 
 .. Tip::
-    This is stable version. Need development version?`Please click <https://bthreadpack.readthedocs.io/zh_CN/dev/>`_。
+    This is stable version. Need development version? `Please click here <https://bthreadpack.readthedocs.io/zh_CN/dev/>`_ .
 
-Welcome to the BUtils's documentation!
+Infrastructure of Ball Chang's projects.
 
-.. Note::
+.. Warning::
     This software does not provide any guarantee.
-
-All C++ Classes
----------------
 
 .. toctree::
    :maxdepth: 1
-   :caption: BUtils
+   :caption: Getting Started
+
+   Installation
+
+.. toctree::
+   :maxdepth: 1
+   :caption: All C++ Classes
 
    BTimer
    BTiming
+   BUtils
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Other
+
+   Glossary
 
 
 
