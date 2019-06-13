@@ -6,6 +6,12 @@ The format is based on
 and this project adheres to
  [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0]
+### Added
+[@Ball Chang]
+
+- Documentation of namespace BUtils
+
 ## [0.1.2-beta]
 ### Added
 [@Ball Chang]
@@ -23,5 +29,7 @@ and this project adheres to
 [Unreleased]: https://gitlab.com/zhangbolily/BUtils/tree/dev
 [0.1.2-beta]:
  https://gitlab.com/zhangbolily/BUtils/tree/v0.1.2-beta
+[0.2.0]:
+ https://gitlab.com/zhangbolily/BUtils/tree/v0.2.0
 
 [@Ball Chang]: https://gitlab.com/zhangbolily

@@ -9,7 +9,7 @@
 
 Ball Chang 所有项目的基础设施。
 
-更详细的文档在 https://butils.readthedocs.io/en/latest/
+更详细的文档在 https://butils.readthedocs.io/zh_CN/latest/
 
 ## 主要特性
 - 生成基于随机数的 UUID
