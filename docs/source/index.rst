@@ -32,6 +32,7 @@ Infrastructure of Ball Chang's projects.
 
    BTimer
    BTiming
+   BUtils
 
 .. toctree::
    :maxdepth: 1

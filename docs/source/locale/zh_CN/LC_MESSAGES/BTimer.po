@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BUtils 0.1.2-beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-01 23:59+0800\n"
+"POT-Creation-Date: 2019-06-13 21:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,12 +30,11 @@ msgid "Overview"
 msgstr "概述"
 
 #: ../../source/BTimer.rst:14 ../../source/BTimer.rst:128
+#, fuzzy
 msgid ""
-"Class BTimer provides repetitive-shot and single-shot timers with a minimum "
+"Class BTimer provides repetitive and single-shot timers with a minimum "
 "precision of 1 millisecond."
-msgstr ""
-"BTimer 类提供最小精度为 1 ms 的周期性"
-"重复触发和单次触发的定时器。"
+msgstr "BTimer 类提供最小精度为 1 ms 的周期性重复触发和单次触发的定时器。"
 
 #: ../../source/BTimer.rst:17
 msgid "Public Types"
@@ -218,9 +217,9 @@ msgid ""
 "jobs in your application. Just create a :term:`timer` and set up the "
 "properties, then start it. You can change the properties of a timer at "
 "any time."
-msgstr "BTimer 提供一种简单易用的编程界面，用于在您的应用中执行周期性任务。"
-"只需要创建一个 :term:`定时器` 对象，并设置相应的属性，然后启动它。"
-"你可以在任何时候改变定时器的属性值。"
+msgstr ""
+"BTimer 提供一种简单易用的编程界面，用于在您的应用中执行周期性任务。只需要创建一个 :term:`定时器` "
+"对象，并设置相应的属性，然后启动它。你可以在任何时候改变定时器的属性值。"
 
 #: ../../source/BTimer.rst:134
 msgid "Example for a one second timer:"
@@ -231,8 +230,9 @@ msgid ""
 "BTimer's timer event system is designed to work in multi-threads "
 "environments, but BTimer object itself doesn't. Do not share a single "
 "BTimer object in threads, just create and use it in the same thread."
-msgstr "BTimer 的定时器事件系统被设计为可以在多线程环境下工作，但是 BTimer 对象本身并不能做到这一点。"
-"不要尝试在线程间共享 BTimer 对象，就在一个线程中创建并使用即可。"
+msgstr ""
+"BTimer 的定时器事件系统被设计为可以在多线程环境下工作，但是 BTimer 对象本身并不能做到这一点。不要尝试在线程间共享 BTimer "
+"对象，就在一个线程中创建并使用即可。"
 
 #: ../../source/BTimer.rst:162
 msgid "Accuracy and Timer Resolution"
@@ -243,8 +243,7 @@ msgid ""
 "The accuracy of timers depends on the underlying operating system and "
 "hardware. On most system and hardware platform, system clock has an "
 "accuracy of microsecond is very common."
-msgstr "定时器的精确度取决于底层操作系统和硬件设备。"
-"在大多数系统平台上，系统时钟普遍可以达到 1 微秒的精确度。"
+msgstr "定时器的精确度取决于底层操作系统和硬件设备。在大多数系统平台上，系统时钟普遍可以达到 1 微秒的精确度。"
 
 #: ../../source/BTimer.rst:167
 msgid ""
@@ -252,9 +251,9 @@ msgid ""
 "under heavy work load (such as many timer events) or high CPU usage (the "
 "timer event loop can't wake up immediately) can make the precision not so"
 " accurate."
-msgstr "大多数系统平台上，BTimer 支持 1 毫秒的最低精度。"
-"但是在定时器系统工作负载非常高（例如非常多的定时器事件）或者高 CPU 使用率（这将导致定时器事件循环不能立刻被操作系统唤醒）"
-"的情况下或导致精度不准（一个定时器循环时间大于 1 毫秒）。"
+msgstr ""
+"大多数系统平台上，BTimer 支持 1 毫秒的最低精度。但是在定时器系统工作负载非常高（例如非常多的定时器事件）或者高 CPU "
+"使用率（这将导致定时器事件循环不能立刻被操作系统唤醒）的情况下或导致精度不准（一个定时器循环时间大于 1 毫秒）。"
 
 #: ../../source/BTimer.rst:171
 msgid "Member Type Documentation"
@@ -266,9 +265,8 @@ msgid ""
 "<BTimer::isActive()>` and :cpp:func:`setActive(bool) "
 "<BTimer::setActive()>` ."
 msgstr ""
-"这个枚举类型被这些函数使用： :cpp:func:`isActive() const "
-"<BTimer::isActive()>` and :cpp:func:`setActive(bool) "
-"<BTimer::setActive()>` ."
+"这个枚举类型被这些函数使用： :cpp:func:`isActive() const <BTimer::isActive()>` and "
+":cpp:func:`setActive(bool) <BTimer::setActive()>` ."
 
 #: ../../source/BTimer.rst:182
 msgid "Constant"
@@ -320,8 +318,7 @@ msgstr "这个属性值表示是否要在间隔超时发生的时候触发间隔
 msgid ""
 "If true, the interval action will be triggered after every interval "
 "period unless timeout occurs. The default value is false."
-msgstr "如果为真，间隔动作会在每个间隔周期后被触发，除非定时器超时。"
-"默认值为假。"
+msgstr "如果为真，间隔动作会在每个间隔周期后被触发，除非定时器超时。默认值为假。"
 
 #: ../../source/BTimer.rst:205 ../../source/BTimer.rst:225
 #: ../../source/BTimer.rst:248
@@ -333,9 +330,7 @@ msgid ""
 "This property holds the interval period of this timer. After every "
 "interval period, interval action will be triggered. The default value is "
 "0, which means no interval."
-msgstr "这个属性值表示该定时器的间隔周期。"
-"在每个间隔周期后，间隔动作会被触发。"
-"默认值是 0，代表没有间隔。"
+msgstr "这个属性值表示该定时器的间隔周期。在每个间隔周期后，间隔动作会被触发。默认值是 0，代表没有间隔。"
 
 #: ../../source/BTimer.rst:235
 msgid ":cpp:func:`setInterval(std::chrono::milliseconds) <BTimer::setInterval()>`"
@@ -345,16 +340,13 @@ msgstr ""
 msgid ""
 "This property holds the expiration time of this timer. After timeout, the"
 " timer will be removed from the timer system until next start calls."
-msgstr ""
-"这个属性值表示该定时器的过期时间（超时时间）。"
-"超时之后，该定时器会从定时器系统中移除直到下一个 start 调用。"
+msgstr "这个属性值表示该定时器的过期时间（超时时间）。超时之后，该定时器会从定时器系统中移除直到下一个 start 调用。"
 
 #: ../../source/BTimer.rst:244
 msgid ""
 "The default value is the maximum value of unsigned int, which means "
 "\"infinite\" for this timer."
-msgstr ""
-"默认值是最大的无符号整型，代表该定时器\"永不超时\"。"
+msgstr "默认值是最大的无符号整型，代表该定时器\"永不超时\"。"
 
 #: ../../source/BTimer.rst:258
 msgid ":cpp:func:`setTimeout(std::chrono::milliseconds) <BTimer::setTimeout()>`"
@@ -450,8 +442,7 @@ msgstr "如果 singleshot 为真，则间隔动作只会被触发一次。"
 msgid ""
 "Returns the precision of timer in milliseconds. Default value is 1 "
 "millisecond."
-msgstr ""
-"返回定时器的精度，以毫秒为单位。默认值是 1 毫秒。"
+msgstr "返回定时器的精度，以毫秒为单位。默认值是 1 毫秒。"
 
 #: ../../source/BTimer.rst:348
 msgid "Set the timer precision in milliseconds."
